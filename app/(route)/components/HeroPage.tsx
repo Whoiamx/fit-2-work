@@ -26,6 +26,7 @@ import { CtaSection } from "./CtaSection";
 import Link from "next/link";
 import { LinkedInPostCard } from "@/components/ui/LinkedinPostCard";
 import Image from "next/image";
+import { Roadmap } from "./Roadmap";
 
 const tools = [
   {
@@ -123,15 +124,21 @@ export const HeroPage = () => {
             </div>
           </div>
           <nav className="hidden md:flex items-center space-x-6">
-            <a href="#tools" className="text-gray-600 hover:text-blue-900">
+            <Link href="#roadmap" className="text-gray-600 hover:text-blue-900">
+              Roadmap
+            </Link>
+            <Link href="#tools" className="text-gray-600 hover:text-blue-900">
               Herramientas
-            </a>
-            <a href="#features" className="text-gray-600 hover:text-blue-900">
+            </Link>
+            <Link
+              href="#features"
+              className="text-gray-600 hover:text-blue-900"
+            >
               Características
-            </a>
-            <a href="#pricing" className="text-gray-600 hover:text-blue-900">
+            </Link>
+            <Link href="#pricing" className="text-gray-600 hover:text-blue-900">
               Sobre Nosotros
-            </a>
+            </Link>
           </nav>
         </div>
       </header>
@@ -254,7 +261,9 @@ export const HeroPage = () => {
           })}
         </div>
       </section>
-
+      <section id="roadmap">
+        <Roadmap />
+      </section>
       {/* Features Section */}
       <section id="features" className="bg-white py-16">
         <div className="container mx-auto px-4">
