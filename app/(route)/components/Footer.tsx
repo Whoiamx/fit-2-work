@@ -36,8 +36,8 @@ export const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Recursos</h4>
             <ul className="space-y-2 text-gray-400">
-              <li>Plantillas</li>
-              <li>Soporte</li>
+              <li>Comunidades</li>
+              <li>Tips</li>
             </ul>
           </div>
           <div>

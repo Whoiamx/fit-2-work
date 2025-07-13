@@ -14,13 +14,15 @@ export const CtaSection = () => {
           por <b>IA.</b>
         </p>
         <div className="flex flex-col sm:flex-row gap-6 justify-center">
-          <Button
-            size="lg"
-            className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-3"
-          >
-            Comenzar Gratis
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Button>
+          <Link href="#tools">
+            <Button
+              size="lg"
+              className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-3"
+            >
+              Comenzar Gratis
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
+          </Link>
           <Button
             size="lg"
             variant="outline"

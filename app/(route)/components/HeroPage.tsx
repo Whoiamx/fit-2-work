@@ -159,13 +159,15 @@ export const HeroPage = () => {
             ideal.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Button
-              size="lg"
-              className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3"
-            >
-              Comenzar Ahora
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
+            <Link href="#tools">
+              <Button
+                size="lg"
+                className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3"
+              >
+                Comenzar Ahora
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </Link>
             <Button
               size="lg"
               variant="outline"
