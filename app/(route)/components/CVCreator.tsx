@@ -13,6 +13,15 @@ import {
   Trash2,
   ImageIcon,
   FileImage,
+  ArrowLeft,
+  Home,
+  Sparkles,
+  MessageSquare,
+  Linkedin,
+  Mail,
+  CheckCircle,
+  User,
+  MapPin,
 } from "lucide-react";
 
 interface PersonalInfo {
@@ -111,6 +120,21 @@ export const CVCreator = () => {
     "Habilidades",
   ];
 
+  // Herramientas disponibles para navegación rápida
+  const tools = [
+    {
+      id: "interview-simulator",
+      name: "Simulador de Entrevistas",
+      icon: MessageSquare,
+    },
+    { id: "cv-creator", name: "Creador de CV", icon: FileText, active: true },
+    { id: "linkedin-strategy", name: "Estrategia LinkedIn", icon: Linkedin },
+    { id: "cover-letter", name: "Cartas de Presentación", icon: Mail },
+    { id: "cv-optimizer", name: "Optimizador de CV", icon: CheckCircle },
+    { id: "linkedin-optimizer", name: "Optimizador LinkedIn", icon: User },
+    { id: "job-roadmap", name: "Roadmap Personalizado", icon: MapPin },
+  ];
+
   const addLink = () => {
     setPersonalInfo((prev) => ({
       ...prev,
@@ -186,7 +210,6 @@ export const CVCreator = () => {
   };
 
   const downloadPDF = () => {
-    // Simular descarga PDF
     const link = document.createElement("a");
     link.href = "#";
     link.download = `${personalInfo.fullName.replace(/\s+/g, "_")}_CV.pdf`;
@@ -195,7 +218,6 @@ export const CVCreator = () => {
   };
 
   const downloadWord = () => {
-    // Simular descarga Word
     const link = document.createElement("a");
     link.href = "#";
     link.download = `${personalInfo.fullName.replace(/\s+/g, "_")}_CV.docx`;
@@ -204,7 +226,6 @@ export const CVCreator = () => {
   };
 
   const downloadPNG = () => {
-    // Simular descarga PNG
     const link = document.createElement("a");
     link.href = "#";
     link.download = `${personalInfo.fullName.replace(/\s+/g, "_")}_CV.png`;
@@ -212,8 +233,84 @@ export const CVCreator = () => {
     alert("Descargando CV como PNG...");
   };
 
+  const goToHome = () => {
+    // Simular navegación al home
+    alert("Navegando al inicio...");
+    // En una app real: router.push('/') o window.location.href = '/'
+  };
+
+  const goToTool = (toolId: string) => {
+    // Simular navegación a otra herramienta
+    alert(`Navegando a: ${tools.find((t) => t.id === toolId)?.name}`);
+    // En una app real: router.push(`/tools/${toolId}`)
+  };
+
   return (
     <div className="min-h-screen bg-gray-100">
+      {/* Navegación Superior */}
+      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+        <div className="px-6 py-4">
+          <div className="flex items-center justify-between">
+            {/* Logo y Navegación Principal */}
+            <div className="flex items-center space-x-6">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg flex items-center justify-center">
+                  <Sparkles className="w-5 h-5 text-white" />
+                </div>
+                <span className="text-xl font-bold text-gray-900">
+                  Fit2Work
+                </span>
+              </div>
+
+              <div className="flex items-center space-x-4">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={goToHome}
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  <Home className="w-4 h-4 mr-2" />
+                  Inicio
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={goToHome}
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Volver
+                </Button>
+              </div>
+            </div>
+
+            {/* Herramientas Rápidas */}
+            <div className="hidden lg:flex items-center space-x-2">
+              <span className="text-sm text-gray-500 mr-2">Herramientas:</span>
+              {tools.slice(0, 4).map((tool) => {
+                const IconComponent = tool.icon;
+                return (
+                  <Button
+                    key={tool.id}
+                    variant={tool.active ? "default" : "ghost"}
+                    size="sm"
+                    onClick={() => goToTool(tool.id)}
+                    className={`text-xs ${
+                      tool.active
+                        ? "bg-purple-600 hover:bg-purple-700"
+                        : "text-gray-600 hover:text-gray-900"
+                    }`}
+                  >
+                    <IconComponent className="w-3 h-3 mr-1" />
+                    {tool.name.split(" ")[0]}
+                  </Button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </nav>
+
       <div className="flex h-screen">
         {/* Panel Izquierdo - Formulario */}
         <div className="w-1/2 bg-gray-800 text-white overflow-y-auto">
@@ -221,31 +318,13 @@ export const CVCreator = () => {
           <div className="p-6 border-b border-gray-700">
             <div className="flex items-center justify-between mb-4">
               <h1 className="text-xl font-semibold">Constructor de CV</h1>
-              <div className="flex items-center space-x-4">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="text-gray-300 hover:text-white"
-                >
-                  <Settings className="w-4 h-4 mr-2" />
-                  Configuración
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="text-gray-300 hover:text-white"
-                >
-                  <Eye className="w-4 h-4 mr-2" />
-                  Vista Previa
-                </Button>
-              </div>
             </div>
 
             {/* Botones de Exportación */}
             <div className="flex space-x-2">
               <Button
                 size="sm"
-                className="bg-blue-600 hover:bg-blue-700 text-white"
+                className="bg-[#1447E6] text-white"
                 onClick={downloadPDF}
               >
                 <FileText className="w-4 h-4 mr-1" />
@@ -261,7 +340,7 @@ export const CVCreator = () => {
               </Button>
               <Button
                 size="sm"
-                className="bg-blue-700 hover:bg-blue-500 text-white"
+                className="bg-blue-800  text-white"
                 onClick={downloadWord}
               >
                 <FileImage className="w-4 h-4 mr-1" />
@@ -278,7 +357,7 @@ export const CVCreator = () => {
                 onClick={() => setActiveTab(tab)}
                 className={`px-4 py-3 text-sm font-medium transition-colors ${
                   activeTab === tab
-                    ? "text-white border-b-2 border-orange-500"
+                    ? "text-white border-b-2 border-blue-500"
                     : "text-gray-400 hover:text-white"
                 }`}
               >
@@ -396,7 +475,7 @@ export const CVCreator = () => {
                   ))}
                   <Button
                     onClick={addLink}
-                    className="w-full bg-[#1447E6] hover:bg-[#93ffb3] text-white hover:text-black"
+                    className="w-full bg-[#1447E6] hover:bg-green-500 hover:text-black text-white"
                   >
                     Agregar Enlace
                   </Button>
@@ -519,7 +598,7 @@ export const CVCreator = () => {
 
                 <Button
                   onClick={addExperience}
-                  className="w-full bg-[#1447E6] hover:bg-[#93ffb3] text-white hover:text-black"
+                  className="w-full bg-[#1447E6] hover:bg-green-500 hover:text-black text-white"
                 >
                   <Plus className="w-4 h-4 mr-2" />
                   Agregar Experiencia
@@ -617,7 +696,7 @@ export const CVCreator = () => {
 
                 <Button
                   onClick={addEducation}
-                  className="w-full bg-orange-600 hover:bg-orange-700 text-white"
+                  className="w-full bg-[#1447E6] hover:bg-green-500 hover:text-black text-white"
                 >
                   <Plus className="w-4 h-4 mr-2" />
                   Agregar Educación
@@ -655,7 +734,7 @@ export const CVCreator = () => {
                         technical: [...prev.technical, ""],
                       }))
                     }
-                    className="w-full bg-gray-600 hover:bg-gray-700 text-white mt-2"
+                    className="w-full bg-[#1447E6] hover:bg-green-500 hover:text-black text-white mt-2"
                     size="sm"
                   >
                     <Plus className="w-4 h-4 mr-2" />
