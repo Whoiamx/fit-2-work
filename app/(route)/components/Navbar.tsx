@@ -10,6 +10,7 @@ import {
   Sparkles,
   User,
 } from "lucide-react";
+import Link from "next/link";
 
 export const Navbar = () => {
   const tools = [
@@ -26,16 +27,9 @@ export const Navbar = () => {
     { id: "job-roadmap", name: "Roadmap Personalizado", icon: MapPin },
   ];
 
-  const goToHome = () => {
-    // Simular navegación al home
-    alert("Navegando al inicio...");
-    // En una app real: router.push('/') o window.location.href = '/'
-  };
-
   const goToTool = (toolId: string) => {
     // Simular navegación a otra herramienta
     alert(`Navegando a: ${tools.find((t) => t.id === toolId)?.name}`);
-    // En una app real: router.push(`/tools/${toolId}`)
   };
 
   return (
@@ -57,11 +51,10 @@ export const Navbar = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={goToHome}
                 className="text-gray-600 hover:text-gray-900"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Volver
+                <Link href="/">Volver</Link>
               </Button>
             </div>
           </div>

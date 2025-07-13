@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { Footer } from "./Footer";
 import { CtaSection } from "./CtaSection";
+import Link from "next/link";
 
 const tools = [
   {
@@ -261,9 +262,9 @@ export const HeroPage = () => {
                     ))}
                   </ul>
                   <Button className="w-full mt-4 group-hover:bg-blue-600 transition-colors">
-                    <a href={tool.route} target="_BLANK">
+                    <Link href={tool.route} target="_BLANK">
                       Usar Herramienta
-                    </a>
+                    </Link>
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                 </CardContent>
