@@ -24,6 +24,7 @@ import {
 import { Footer } from "./Footer";
 import { CtaSection } from "./CtaSection";
 import Link from "next/link";
+import { LinkedInPostCard } from "@/components/ui/LinkedinPostCard";
 
 const tools = [
   {
@@ -164,30 +165,19 @@ export const HeroPage = () => {
               Ver Demo
             </Button>
           </div>
-
           <div className="relative max-w-md mx-auto">
-            <div className="bg-white rounded-lg shadow-2xl p-6 transform rotate-2 hover:rotate-0 transition-transform duration-300">
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-gray-200 rounded-full"></div>
-                  <div>
-                    <div className="h-4 bg-gray-800 rounded w-24 mb-1"></div>
-                    <div className="h-3 bg-gray-400 rounded w-32"></div>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <div className="h-3 bg-gray-300 rounded w-full"></div>
-                  <div className="h-3 bg-gray-300 rounded w-3/4"></div>
-                  <div className="h-3 bg-gray-300 rounded w-1/2"></div>
-                </div>
-                <div className="pt-2">
-                  <div className="h-3 bg-blue-200 rounded w-20 mb-2"></div>
-                  <div className="space-y-1">
-                    <div className="h-2 bg-gray-200 rounded w-full"></div>
-                    <div className="h-2 bg-gray-200 rounded w-5/6"></div>
-                  </div>
-                </div>
-              </div>
+            <div className="bg-white rounded-lg shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-300">
+              <LinkedInPostCard
+                fullName="Gaston Timchuk Bilik"
+                jobTitle="Analista QA | #OpenToWork"
+                timeAgo="1 día"
+                postContent={
+                  "Estoy abierto a nuevas oportunidades laborales. Si conoces alguna vacante que se ajuste a mi perfil, ¡agradecería mucho tu ayuda!"
+                }
+                avatarSrc={
+                  " https://avatars.githubusercontent.com/u/12345678?v=4"
+                }
+              />
             </div>
           </div>
         </div>
