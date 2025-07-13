@@ -135,7 +135,7 @@ export const HeroPage = () => {
       </header>
 
       <section className="container mx-auto px-4 py-16 text-center">
-        <div className="max-w-4xl mx-auto">
+        <div className=" flex  flex-col items-center gap-7 max-w-4xl mx-auto">
           <Badge className="mb-4 bg-blue-100 text-blue-700 hover:bg-blue-100">
             ✨ Potenciado por Inteligencia Artificial
           </Badge>
