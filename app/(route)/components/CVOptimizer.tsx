@@ -102,7 +102,7 @@ export const CVOptimizer = () => {
         {/* Header */}
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-gray-900">
-            ¿Qué puedes esperar de nuestro optimizador?
+            ¿Qué podes esperar de nuestro optimizador de CV?
           </h1>
           <Button variant="link" className="text-blue-600 hover:text-blue-800">
             Ver más
