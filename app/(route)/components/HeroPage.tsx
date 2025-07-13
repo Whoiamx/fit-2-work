@@ -25,6 +25,7 @@ import { Footer } from "./Footer";
 import { CtaSection } from "./CtaSection";
 import Link from "next/link";
 import { LinkedInPostCard } from "@/components/ui/LinkedinPostCard";
+import Image from "next/image";
 
 const tools = [
   {
@@ -113,12 +114,12 @@ export const HeroPage = () => {
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-500 rounded-lg flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-white" />
-            </div>
             <span className="text-2xl font-bold text-gray-900">
               Fit<span className="text-blue-500">2</span>Work
             </span>
+            <div className="w-10 h-10   flex items-center justify-center">
+              <Image src={"/iconfit.svg"} width={100} height={100} alt="icon" />
+            </div>
           </div>
           <nav className="hidden md:flex items-center space-x-6">
             <a href="#tools" className="text-gray-600 hover:text-gray-900">
@@ -135,7 +136,7 @@ export const HeroPage = () => {
       </header>
 
       <section className="container mx-auto px-4 py-16 text-center">
-        <div className=" flex  flex-col items-center gap-7 max-w-4xl mx-auto">
+        <div className=" flex  flex-col items-center gap- max-w-4xl mx-auto">
           <Badge className="mb-4 bg-blue-100 text-blue-700 hover:bg-blue-100">
             ✨ Potenciado por Inteligencia Artificial
           </Badge>

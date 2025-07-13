@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export const CtaSection = () => {
   return (
@@ -12,7 +13,7 @@ export const CtaSection = () => {
           Perfecciona tu búsqueda laboral con nuestras herramientas impulsadas
           por <b>IA.</b>
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-6 justify-center">
           <Button
             size="lg"
             className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-3"
@@ -25,9 +26,17 @@ export const CtaSection = () => {
             variant="outline"
             className="border-white text-white hover:bg-blue-900 hover:text-white text-lg px-8 py-3 bg-transparent"
           >
-            Apoyar al proyecto
+            <Link href="https://cafecito.app/gaastontimchuk" target="_blank">
+              Apoyar al proyecto
+            </Link>
           </Button>
         </div>
+        <p className="text-sm text-blue-200 mt-4">
+          <i>
+            * Tu apoyo es fundamental para seguir mejorando y ofreciendo nuevas
+            funcionalidades.
+          </i>{" "}
+        </p>
       </div>
     </section>
   );
