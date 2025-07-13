@@ -102,19 +102,6 @@ const tools = [
     features: ["Guía completa", "Ejemplos reales", "Checklist de optimización"],
     route: "/linkedin-optimizer",
   },
-  {
-    id: "job-roadmap",
-    title: "Roadmap Personalizado",
-    description: "Sigue un plan estructurado para tu búsqueda laboral",
-    icon: MapPin,
-    color: "bg-pink-500",
-    features: [
-      "Plan personalizado",
-      "Seguimiento de progreso",
-      "Metas semanales",
-    ],
-    route: "/job-roadmap",
-  },
 ];
 
 export const HeroPage = () => {
@@ -243,7 +230,9 @@ export const HeroPage = () => {
                     <IconComponent className="w-6 h-6 text-white" />
                   </div>
                   <CardTitle className="text-xl group-hover:text-blue-600 transition-colors">
-                    {tool.title}
+                    <Link href={tool.route} target="_BLANK">
+                      {tool.title}
+                    </Link>
                   </CardTitle>
                   <CardDescription className="text-gray-600">
                     {tool.description}
@@ -261,7 +250,7 @@ export const HeroPage = () => {
                       </li>
                     ))}
                   </ul>
-                  <Button className="w-full mt-4 group-hover:bg-blue-600 transition-colors">
+                  <Button className="w-full border-2 text-md text-white font-bold bg-blue-500 mt-4 hover:bg-green-500 transition-colors">
                     <Link href={tool.route} target="_BLANK">
                       Usar Herramienta
                     </Link>
