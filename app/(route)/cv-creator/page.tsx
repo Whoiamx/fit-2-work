@@ -1,7 +1,5 @@
+import { CVCreator } from "../components/CVCreator";
+
 export default function CvCreatorPage() {
-  return (
-    <div>
-      <h1>Hello Page</h1>
-    </div>
-  );
+  return <CVCreator />;
 }
