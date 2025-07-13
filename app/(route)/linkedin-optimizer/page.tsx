@@ -1,7 +1,5 @@
+import { Chatbot } from "../components/Chatbot";
+
 export default function LinkedinOptimizerPage() {
-  return (
-    <div>
-      <h1>Hello Page</h1>
-    </div>
-  );
+  return <Chatbot />;
 }

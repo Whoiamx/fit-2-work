@@ -17,8 +17,7 @@ export const Navbar = () => {
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
       <div className="px-6 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo y Navegación Principal */}
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center  space-x-450">
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-500 rounded-lg flex items-center justify-center">
                 <Sparkles className="w-5 h-5 text-white" />
