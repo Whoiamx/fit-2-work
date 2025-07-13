@@ -27,6 +27,8 @@ import Link from "next/link";
 import { LinkedInPostCard } from "@/components/ui/LinkedinPostCard";
 import Image from "next/image";
 import { Roadmap } from "./Roadmap";
+import { RandomTips } from "@/components/ui/randomTips";
+import { AIPoweredFeaturesSection } from "./AIPowered";
 
 const tools = [
   {
@@ -193,7 +195,7 @@ export const HeroPage = () => {
           </div>
         </div>
       </section>
-
+      <RandomTips />
       <section className="container mx-auto px-4 py-8">
         <div className="flex flex-wrap justify-center items-center gap-8 opacity-60"></div>
       </section>
@@ -267,76 +269,7 @@ export const HeroPage = () => {
         <Roadmap />
       </section>
       {/* Features Section */}
-      <section id="features" className="bg-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <Badge className="mb-4 bg-blue-100 text-blue-700">
-                Potenciado por IA
-              </Badge>
-              <h3 className="text-3xl font-bold text-gray-900 mb-6">
-                Tecnología de vanguardia para resultados excepcionales
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Nuestra IA analiza miles de ofertas laborales exitosas
-              </p>
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5" />
-                  <span>
-                    Análisis en tiempo real de tendencias del mercado laboral
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5" />
-                  <span>
-                    Personalización basada en tu industria y experiencia
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5" />
-                  <span>Feedback instantáneo y sugerencias de mejora</span>
-                </li>
-              </ul>
-              <Button className="mt-6 bg-blue-600 hover:bg-blue-700">
-                Conocer más
-              </Button>
-            </div>
-            <div className="relative">
-              <div className="bg-gradient-to-br from-blue-100 to-blue-100 rounded-2xl p-8">
-                <div className="bg-white rounded-lg shadow-lg p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <h4 className="font-semibold">Análisis de CV</h4>
-                    <Badge className="bg-green-100 text-green-700">
-                      95% Match
-                    </Badge>
-                  </div>
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm">Palabras clave</span>
-                      <div className="w-24 h-2 bg-green-200 rounded-full">
-                        <div className="w-20 h-2 bg-green-500 rounded-full"></div>
-                      </div>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm">Formato</span>
-                      <div className="w-24 h-2 bg-blue-200 rounded-full">
-                        <div className="w-22 h-2 bg-blue-500 rounded-full"></div>
-                      </div>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm">Experiencia</span>
-                      <div className="w-24 h-2 bg-blue-200 rounded-full">
-                        <div className="w-18 h-2 bg-blue-500 rounded-full"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <AIPoweredFeaturesSection />
 
       <CtaSection />
 
