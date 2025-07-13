@@ -1,0 +1,353 @@
+"use client";
+
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  FileText,
+  MessageSquare,
+  Linkedin,
+  Mail,
+  CheckCircle,
+  User,
+  MapPin,
+  ArrowRight,
+  Sparkles,
+} from "lucide-react";
+import { Footer } from "./Footer";
+import { CtaSection } from "./CtaSection";
+
+const tools = [
+  {
+    id: "interview-simulator",
+    title: "Simulador de Entrevistas",
+    description:
+      "Practica entrevistas laborales con IA según tu puesto y rubro deseado",
+    icon: MessageSquare,
+    color: "bg-blue-500",
+    features: [
+      "Feedback automático",
+      "Preguntas personalizadas",
+      "Análisis de respuestas",
+    ],
+    route: "/interview-simulator",
+  },
+  {
+    id: "cv-creator",
+    title: "Creador de CV Profesional",
+    description: "Genera un CV atractivo y profesional con formulario guiado",
+    icon: FileText,
+    color: "bg-purple-500",
+    features: [
+      "Diseños modernos",
+      "Optimizado para ATS",
+      "Descarga instantánea",
+    ],
+    route: "/cv-creator",
+  },
+  {
+    id: "linkedin-strategy",
+    title: "Estrategia LinkedIn",
+    description:
+      "Diseña publicaciones estratégicas para aumentar tu visibilidad",
+    icon: Linkedin,
+    color: "bg-blue-600",
+    features: [
+      "Contenido personalizado",
+      "Calendario de posts",
+      "Análisis de engagement",
+    ],
+    route: "/linkedin-strategy",
+  },
+  {
+    id: "cover-letter",
+    title: "Cartas de Presentación",
+    description: "Redacta cartas y correos personalizados para cada aplicación",
+    icon: Mail,
+    color: "bg-green-500",
+    features: [
+      "Personalización automática",
+      "Múltiples formatos",
+      "Plantillas profesionales",
+    ],
+    route: "/cover-letter",
+  },
+  {
+    id: "cv-optimizer",
+    title: "Optimizador de CV",
+    description: "Mejora tu CV existente con sugerencias inteligentes",
+    icon: CheckCircle,
+    color: "bg-orange-500",
+    features: [
+      "Análisis detallado",
+      "Sugerencias de mejora",
+      "Comparación con ofertas",
+    ],
+    route: "/cv-optimizer",
+  },
+  {
+    id: "linkedin-optimizer",
+    title: "Optimizador LinkedIn",
+    description: "Optimiza tu perfil con guía paso a paso y ejemplos",
+    icon: User,
+    color: "bg-indigo-500",
+    features: ["Guía completa", "Ejemplos reales", "Checklist de optimización"],
+    route: "/linkedin-optimizer",
+  },
+  {
+    id: "job-roadmap",
+    title: "Roadmap Personalizado",
+    description: "Sigue un plan estructurado para tu búsqueda laboral",
+    icon: MapPin,
+    color: "bg-pink-500",
+    features: [
+      "Plan personalizado",
+      "Seguimiento de progreso",
+      "Metas semanales",
+    ],
+    route: "/job-roadmap",
+  },
+];
+
+export const HeroPage = () => {
+  const [selectedTool, setSelectedTool] = useState<string | null>(null);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-500 rounded-lg flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-white" />
+            </div>
+            <span className="text-2xl font-bold text-gray-900">
+              Fit<span className="text-blue-500">2</span>Work
+            </span>
+          </div>
+          <nav className="hidden md:flex items-center space-x-6">
+            <a href="#tools" className="text-gray-600 hover:text-gray-900">
+              Herramientas
+            </a>
+            <a href="#features" className="text-gray-600 hover:text-gray-900">
+              Características
+            </a>
+            <a href="#pricing" className="text-gray-600 hover:text-gray-900">
+              Sobre Nosotros
+            </a>
+          </nav>
+        </div>
+      </header>
+
+      <section className="container mx-auto px-4 py-16 text-center">
+        <div className="max-w-4xl mx-auto">
+          <Badge className="mb-4 bg-blue-100 text-blue-700 hover:bg-blue-100">
+            ✨ Potenciado por Inteligencia Artificial
+          </Badge>
+          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            Mejora tu búsqueda laboral con{" "}
+            <span className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+              IA
+            </span>
+          </h1>
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Todas las herramientas que necesitas para conseguir tu trabajo
+            ideal.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <Button
+              size="lg"
+              className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3"
+            >
+              Comenzar Ahora
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="text-lg px-8 py-3 bg-transparent"
+            >
+              Ver Demo
+            </Button>
+          </div>
+
+          <div className="relative max-w-md mx-auto">
+            <div className="bg-white rounded-lg shadow-2xl p-6 transform rotate-2 hover:rotate-0 transition-transform duration-300">
+              <div className="space-y-3">
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-gray-200 rounded-full"></div>
+                  <div>
+                    <div className="h-4 bg-gray-800 rounded w-24 mb-1"></div>
+                    <div className="h-3 bg-gray-400 rounded w-32"></div>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <div className="h-3 bg-gray-300 rounded w-full"></div>
+                  <div className="h-3 bg-gray-300 rounded w-3/4"></div>
+                  <div className="h-3 bg-gray-300 rounded w-1/2"></div>
+                </div>
+                <div className="pt-2">
+                  <div className="h-3 bg-blue-200 rounded w-20 mb-2"></div>
+                  <div className="space-y-1">
+                    <div className="h-2 bg-gray-200 rounded w-full"></div>
+                    <div className="h-2 bg-gray-200 rounded w-5/6"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="container mx-auto px-4 py-8">
+        <div className="flex flex-wrap justify-center items-center gap-8 opacity-60"></div>
+      </section>
+
+      {/* Tools Grid */}
+      <section id="tools" className="container mx-auto px-4 py-16">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            Herramientas Completas para tu{" "}
+            <span className="text-blue-500">
+              <i>
+                <u>Éxito</u>
+              </i>
+            </span>
+          </h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Todo lo que necesitas para destacar en tu búsqueda laboral, desde la
+            preparación hasta la aplicación.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {tools.map((tool) => {
+            const IconComponent = tool.icon;
+            return (
+              <Card
+                key={tool.id}
+                className="group hover:shadow-xl transition-all duration-300 cursor-pointer border-0 shadow-lg hover:-translate-y-1"
+                onClick={() => setSelectedTool(tool.id)}
+              >
+                <CardHeader>
+                  <div
+                    className={`w-12 h-12 ${tool.color} rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}
+                  >
+                    <IconComponent className="w-6 h-6 text-white" />
+                  </div>
+                  <CardTitle className="text-xl group-hover:text-blue-600 transition-colors">
+                    {tool.title}
+                  </CardTitle>
+                  <CardDescription className="text-gray-600">
+                    {tool.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2">
+                    {tool.features.map((feature, index) => (
+                      <li
+                        key={index}
+                        className="flex items-center text-sm text-gray-600"
+                      >
+                        <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <Button className="w-full mt-4 group-hover:bg-blue-600 transition-colors">
+                    <a href={tool.route} target="_BLANK">
+                      Usar Herramienta
+                    </a>
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section id="features" className="bg-white py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <Badge className="mb-4 bg-blue-100 text-blue-700">
+                Potenciado por IA
+              </Badge>
+              <h3 className="text-3xl font-bold text-gray-900 mb-6">
+                Tecnología de vanguardia para resultados excepcionales
+              </h3>
+              <p className="text-gray-600 mb-6">
+                Nuestra IA analiza miles de ofertas laborales exitosas
+              </p>
+              <ul className="space-y-4">
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5" />
+                  <span>
+                    Análisis en tiempo real de tendencias del mercado laboral
+                  </span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5" />
+                  <span>
+                    Personalización basada en tu industria y experiencia
+                  </span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5" />
+                  <span>Feedback instantáneo y sugerencias de mejora</span>
+                </li>
+              </ul>
+              <Button className="mt-6 bg-blue-600 hover:bg-blue-700">
+                Conocer más
+              </Button>
+            </div>
+            <div className="relative">
+              <div className="bg-gradient-to-br from-blue-100 to-blue-100 rounded-2xl p-8">
+                <div className="bg-white rounded-lg shadow-lg p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h4 className="font-semibold">Análisis de CV</h4>
+                    <Badge className="bg-green-100 text-green-700">
+                      95% Match
+                    </Badge>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm">Palabras clave</span>
+                      <div className="w-24 h-2 bg-green-200 rounded-full">
+                        <div className="w-20 h-2 bg-green-500 rounded-full"></div>
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm">Formato</span>
+                      <div className="w-24 h-2 bg-blue-200 rounded-full">
+                        <div className="w-22 h-2 bg-blue-500 rounded-full"></div>
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm">Experiencia</span>
+                      <div className="w-24 h-2 bg-blue-200 rounded-full">
+                        <div className="w-18 h-2 bg-blue-500 rounded-full"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <CtaSection />
+
+      <Footer />
+    </div>
+  );
+};
