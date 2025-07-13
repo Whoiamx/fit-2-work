@@ -23,9 +23,9 @@ export const CtaSection = () => {
           <Button
             size="lg"
             variant="outline"
-            className="border-white text-white hover:bg-white hover:text-blue-300 text-lg px-8 py-3 bg-transparent"
+            className="border-white text-white hover:bg-blue-900 hover:text-white text-lg px-8 py-3 bg-transparent"
           >
-            Demo
+            Apoyar al proyecto
           </Button>
         </div>
       </div>
