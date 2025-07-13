@@ -1,4 +1,4 @@
-import { Sparkles } from "lucide-react";
+import Image from "next/image";
 
 export const Footer = () => {
   return (
@@ -7,12 +7,17 @@ export const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-500 rounded-lg flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-white" />
-              </div>
               <span className="text-2xl font-bold">
                 Fit<span className=" text-blue-500">2</span>Work
               </span>
+              <div className="w-10 h-10   flex items-center justify-center">
+                <Image
+                  src={"/iconfit.svg"}
+                  width={100}
+                  height={100}
+                  alt="icon"
+                />
+              </div>
             </div>
             <p className="text-gray-400">
               La plataforma más completa para potenciar tu búsqueda laboral con

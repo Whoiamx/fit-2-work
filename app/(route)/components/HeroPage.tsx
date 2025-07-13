@@ -117,18 +117,19 @@ export const HeroPage = () => {
             <span className="text-2xl font-bold text-gray-900">
               Fit<span className="text-blue-500">2</span>Work
             </span>
+
             <div className="w-10 h-10   flex items-center justify-center">
               <Image src={"/iconfit.svg"} width={100} height={100} alt="icon" />
             </div>
           </div>
           <nav className="hidden md:flex items-center space-x-6">
-            <a href="#tools" className="text-gray-600 hover:text-gray-900">
+            <a href="#tools" className="text-gray-600 hover:text-blue-900">
               Herramientas
             </a>
-            <a href="#features" className="text-gray-600 hover:text-gray-900">
+            <a href="#features" className="text-gray-600 hover:text-blue-900">
               Características
             </a>
-            <a href="#pricing" className="text-gray-600 hover:text-gray-900">
+            <a href="#pricing" className="text-gray-600 hover:text-blue-900">
               Sobre Nosotros
             </a>
           </nav>

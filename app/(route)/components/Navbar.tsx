@@ -20,9 +20,12 @@ export const Navbar = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center  space-x-450">
             <div className="flex items-center space-x-3">
-              <span className="text-2xl font-bold text-gray-900">
-                Fit<span className="text-blue-600">2</span>Work
-              </span>
+              <Link href="/" className="flex items-center space-x-2">
+                <span className="text-2xl font-bold text-gray-900">
+                  Fit<span className="text-blue-600">2</span>Work
+                </span>
+              </Link>
+
               <div className="w-10 h-10   flex items-center justify-center">
                 <Image
                   src={"/iconfit.svg"}
