@@ -17,9 +17,7 @@ import {
   Mail,
   CheckCircle,
   User,
-  MapPin,
   ArrowRight,
-  Sparkles,
 } from "lucide-react";
 import { Footer } from "./Footer";
 import { CtaSection } from "./CtaSection";
@@ -35,7 +33,7 @@ const tools = [
     id: "interview-simulator",
     title: "Simulador de Entrevistas",
     description:
-      "Practica entrevistas laborales con IA según tu puesto y rubro deseado",
+      "Practica entrevistas laborales según tu puesto y rubro deseado",
     icon: MessageSquare,
     color: "bg-blue-500",
     features: [
@@ -117,7 +115,7 @@ export const HeroPage = () => {
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <span className="text-2xl font-bold text-gray-900">
+            <span className="text-3xl font-bold text-gray-900">
               Fit<span className="text-blue-500">2</span>Work
             </span>
 
@@ -126,19 +124,28 @@ export const HeroPage = () => {
             </div>
           </div>
           <nav className="hidden md:flex items-center space-x-6">
-            <Link href="#roadmap" className="text-gray-600 hover:text-blue-900">
+            <Link
+              href="#roadmap"
+              className="text-gray-600 hover:text-blue-900 hover:underline "
+            >
               Roadmap
             </Link>
-            <Link href="#tools" className="text-gray-600 hover:text-blue-900">
+            <Link
+              href="#tools"
+              className="text-gray-600 hover:text-blue-900 hover:underline"
+            >
               Herramientas
             </Link>
             <Link
               href="#features"
-              className="text-gray-600 hover:text-blue-900"
+              className="text-gray-600 hover:text-blue-900 hover:underline"
             >
               Características
             </Link>
-            <Link href="#pricing" className="text-gray-600 hover:text-blue-900">
+            <Link
+              href="#pricing"
+              className="text-gray-600 hover:text-blue-900 hover:underline"
+            >
               Sobre Nosotros
             </Link>
           </nav>

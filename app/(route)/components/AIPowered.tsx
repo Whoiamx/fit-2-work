@@ -18,7 +18,7 @@ export const AIPoweredFeaturesSection = () => {
               ✨ Potenciado por IA
             </Badge>
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              La Inteligencia Artificial Detrás de JobAI Pro
+              La Inteligencia Artificial detrás de Fit2Work
             </h2>
             <p className="text-lg text-gray-600 mb-6">
               Fit2Work aprovecha el poder de modelos de lenguaje avanzados, como

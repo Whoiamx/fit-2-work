@@ -8,7 +8,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Fit2Work",
+  title: "Fit To Work - Potencia tu Carrera Profesional con IA",
   description: "La plataforma para potenciar tu carrera profesional con IA",
 };
 
