@@ -20,7 +20,7 @@ interface RoadmapItem {
 
 const roadmapItems: RoadmapItem[] = [
   {
-    title: "Creador de CV Profesional",
+    title: "Creador de CV",
     description: "Genera un CV atractivo y optimizado para ATS.",
     icon: FileText,
     route: "/cv-creator",
@@ -44,7 +44,7 @@ const roadmapItems: RoadmapItem[] = [
     route: "/linkedin-strategy",
   },
   {
-    title: "Cartas de Presentación",
+    title: "Creador de Carta de Presentación",
     description: "Redacción personalizada con IA para cada aplicación.",
     icon: Mail,
     route: "/cover-letter",

@@ -72,7 +72,7 @@ const tools = [
   },
   {
     id: "cover-letter",
-    title: "Generador de Cover Letters",
+    title: "Generador de Carta de Presentacion",
     description:
       "Redacta cartas y correos personalizados para cada aplicación laboral",
     icon: Mail,
