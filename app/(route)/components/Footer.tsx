@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export const Footer = () => {
   return (
@@ -27,10 +28,26 @@ export const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Herramientas</h4>
             <ul className="space-y-2 text-gray-400">
-              <li>Creador de CV</li>
-              <li>Simulador de Entrevistas</li>
-              <li>Optimizador LinkedIn</li>
-              <li>Cartas de Presentación</li>
+              <li>
+                <Link href="/cv-creator" target="_blank">
+                  Creador de CV
+                </Link>
+              </li>
+              <li>
+                <Link href="/interview-simulator" target="_blank">
+                  Simulador de Entrevistas
+                </Link>
+              </li>
+              <li>
+                <Link href="/cv-optimizer" target="_blank">
+                  Optimizador LinkedIn
+                </Link>
+              </li>
+              <li>
+                <Link href="/cover-letter" target="_blank">
+                  Cartas de Presentación
+                </Link>
+              </li>
             </ul>
           </div>
           <div>

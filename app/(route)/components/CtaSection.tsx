@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, HandCoins } from "lucide-react";
 import Link from "next/link";
 
 export const CtaSection = () => {
@@ -17,20 +17,22 @@ export const CtaSection = () => {
           <Link href="#tools">
             <Button
               size="lg"
-              className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-3"
+              className="bg-white text-blue-600 cursor-pointer hover:bg-gray-100 text-lg px-8 py-3"
             >
-              Comenzar Gratis
+              Comenzar
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </Link>
           <Button
             size="lg"
             variant="outline"
-            className="border-white text-white hover:bg-blue-900 hover:text-white text-lg px-8 py-3 bg-transparent"
+            className="border-white text-white text-center cursor-pointer  hover:bg-blue-900 hover:text-white text-lg px-8 py-3 bg-transparent"
           >
-            <Link href="https://cafecito.app/gaastontimchuk" target="_blank">
-              Apoyar al proyecto
-            </Link>
+            <Link
+              href="https://cafecito.app/gaastontimchuk"
+              target="_blank"
+            ></Link>
+            Apoyar al proyecto <HandCoins />
           </Button>
         </div>
         <p className="text-sm text-blue-200 mt-4">

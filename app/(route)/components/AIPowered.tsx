@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export const AIPoweredFeaturesSection = () => {
   return (
@@ -17,8 +18,9 @@ export const AIPoweredFeaturesSection = () => {
             <Badge className="mb-4 bg-blue-100 text-blue-700">
               ✨ Potenciado por IA
             </Badge>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              La Inteligencia Artificial detrás de Fit2Work
+            <h2 className="text-nowrap text-4xl font-bold text-gray-900 mb-4">
+              La Inteligencia Artificial detrás de Fit
+              <span className="text-blue-500">2</span>Work
             </h2>
             <p className="text-lg text-gray-600 mb-6">
               Fit2Work aprovecha el poder de modelos de lenguaje avanzados, como
@@ -39,10 +41,12 @@ export const AIPoweredFeaturesSection = () => {
                 <span>Resultados precisos y personalizados</span>
               </li>
             </ul>
-            <Button className="mt-8 bg-blue-600 hover:bg-blue-700">
-              Descubre el Poder de la IA
-              <ArrowRight className="ml-2 w-4 h-4" />
-            </Button>
+            <Link href="#tools">
+              <Button className="mt-8 bg-blue-600 hover:bg-blue-700">
+                Descubre el Poder de la IA
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </Link>
           </div>
 
           {/* Right Column: Image */}
