@@ -1,14 +1,16 @@
 "use client";
 
+import type React from "react";
+
 import {
   FileText,
   CheckCircle,
   Linkedin,
   Mail,
   MessageSquare,
-  CheckLine,
 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 
 interface RoadmapItem {
@@ -20,7 +22,7 @@ interface RoadmapItem {
 
 const roadmapItems: RoadmapItem[] = [
   {
-    title: "Creador de CV",
+    title: "Creador de CV Profesional",
     description: "Genera un CV atractivo y optimizado para ATS.",
     icon: FileText,
     route: "/cv-creator",
@@ -34,17 +36,11 @@ const roadmapItems: RoadmapItem[] = [
   {
     title: "Optimizador de LinkedIn",
     description: "Guía paso a paso para un perfil impactante.",
-    icon: CheckLine,
+    icon: Linkedin,
     route: "/linkedin-optimizer",
   },
   {
-    title: "Estrategia de Linkedin",
-    description: "Ajusta tu estrategia de busqueda laboral en Linkedin con IA.",
-    icon: Linkedin,
-    route: "/linkedin-strategy",
-  },
-  {
-    title: "Creador de Carta de Presentación",
+    title: "Cartas de Presentación",
     description: "Redacción personalizada con IA para cada aplicación.",
     icon: Mail,
     route: "/cover-letter",
@@ -59,7 +55,7 @@ const roadmapItems: RoadmapItem[] = [
 
 export const Roadmap = () => {
   return (
-    <section className="bg-gradient-to-br from-gray-900 to-blue-950 py-12 text-white relative overflow-hidden">
+    <section className="bg-gradient-to-br from-gray-900 to-blue-950 py-16 text-white relative overflow-hidden">
       {/* Fondo con patrón sutil */}
       <div className="absolute inset-0 opacity-10">
         <svg
@@ -85,7 +81,7 @@ export const Roadmap = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col gap-4 text-center mb-10">
+        <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-3 text-white">
             Nuestro Roadmap de{" "}
             <span className="text-blue-500">
@@ -98,48 +94,53 @@ export const Roadmap = () => {
           </p>
         </div>
 
-        <div className="relative flex flex-col items-center">
+        <div className="relative max-w-3xl mx-auto">
           {/* Línea central del roadmap */}
-          <div className="absolute h-full w-1 bg-blue-600 rounded-full left-1/2 transform -translate-x-1/2 hidden md:block"></div>
+          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-blue-600 rounded-full hidden md:block"></div>
 
-          <div className="grid md:grid-cols-2 gap-y-16 gap-x-12 w-full">
+          <div className="space-y-12 md:space-y-16">
             {roadmapItems.map((item, index) => {
               const IconComponent = item.icon;
               const isEven = index % 2 === 0; // Para alternar izquierda/derecha en desktop
 
               return (
-                <Link
-                  href={item.route}
+                <div
                   key={index}
-                  className="w-full"
-                  target="_blank"
+                  className={`flex flex-col md:flex-row items-center md:items-stretch w-full ${
+                    isEven ? "md:justify-start" : "md:justify-end"
+                  }`}
                 >
-                  <div
-                    className={`flex items-center w-full ${
-                      isEven
-                        ? "md:justify-end md:pr-16"
-                        : "md:justify-start md:pl-16"
-                    }`}
+                  {/* Contenido de la tarjeta */}
+
+                  <Card
+                    className={`relative w-full md:w-[calc(50%-2rem)] p-4 bg-gray-800 border border-gray-700 shadow-lg transition-all duration-300 hover:scale-[1.02]`}
                   >
-                    <div
-                      className={`flex flex-col items-center text-center md:text-left ${
-                        isEven ? "md:items-end" : "md:items-start"
-                      } space-y-3 p-3 rounded-lg transition-all duration-300 hover:scale-105`}
-                    >
-                      <div
-                        className={`w-12 h-12 rounded-full flex items-center justify-center mb-2 shadow-lg`}
-                      >
-                        <IconComponent className="w-6 h-6 text-white" />
+                    <CardHeader className="p-0 pb-2 flex flex-row items-center gap-3">
+                      <IconComponent className="w-5 h-5 text-white" />
+
+                      <div>
+                        <Link href={item.route} target="_blank">
+                          <CardTitle className="text-xl font-semibold text-white">
+                            {item.title}
+                          </CardTitle>
+                        </Link>
                       </div>
-                      <h3 className="text-xl font-semibold text-white">
-                        {item.title}
-                      </h3>
-                      <p className="text-sm text-gray-300 max-w-xs">
-                        {item.description}
-                      </p>
-                    </div>
-                  </div>
-                </Link>
+                    </CardHeader>
+                    <CardContent className="p-0">
+                      <Link href={item.route} target="_blank">
+                        <p className="text-sm text-gray-300 mb-3">
+                          {item.description}
+                        </p>
+                      </Link>
+                    </CardContent>
+
+                    <div
+                      className={`absolute top-1/2 transform -translate-y-1/2 w-8 h-1 bg-blue-600 hidden md:block ${
+                        isEven ? "right-[-2rem]" : "left-[-2rem]"
+                      }`}
+                    ></div>
+                  </Card>
+                </div>
               );
             })}
           </div>

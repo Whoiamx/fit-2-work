@@ -139,10 +139,10 @@ export const HeroPage = () => {
               Herramientas
             </Link>
             <Link
-              href="#features"
+              href="#faqs"
               className="text-gray-600 hover:text-blue-900 hover:underline"
             >
-              Características
+              FAQs
             </Link>
             <Link
               href="#pricing"
@@ -281,7 +281,9 @@ export const HeroPage = () => {
       <AIPoweredFeaturesSection />
 
       <CtaSection />
-      <Faqs />
+      <section id="faqs">
+        <Faqs />
+      </section>
 
       <Footer />
     </div>
