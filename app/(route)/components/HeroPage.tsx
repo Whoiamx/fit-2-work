@@ -72,14 +72,15 @@ const tools = [
   },
   {
     id: "cover-letter",
-    title: "Cartas de Presentación",
-    description: "Redacta cartas y correos personalizados para cada aplicación",
+    title: "Generador de Cover Letters",
+    description:
+      "Redacta cartas y correos personalizados para cada aplicación laboral",
     icon: Mail,
     color: "bg-green-500",
     features: [
       "Personalización automática",
-      "Múltiples formatos",
-      "Plantillas profesionales",
+      "Carta personalizada para tu trabajo ideal",
+      "Plantilla profesional",
     ],
     route: "/cover-letter",
   },
