@@ -27,6 +27,7 @@ import Image from "next/image";
 import { Roadmap } from "./Roadmap";
 import { RandomTips } from "@/components/ui/randomTips";
 import { AIPoweredFeaturesSection } from "./AIPowered";
+import { Faqs } from "./Faqs";
 
 const tools = [
   {
@@ -276,10 +277,11 @@ export const HeroPage = () => {
       <section id="roadmap">
         <Roadmap />
       </section>
-      {/* Features Section */}
+
       <AIPoweredFeaturesSection />
 
       <CtaSection />
+      <Faqs />
 
       <Footer />
     </div>
