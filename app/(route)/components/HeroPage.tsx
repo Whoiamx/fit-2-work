@@ -188,7 +188,7 @@ export const HeroPage = () => {
           <div className="relative max-w-md mx-auto">
             <div className="bg-white rounded-lg shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-300">
               <LinkedInPostCard
-                fullName="Gaston Timchuk Bilik"
+                fullName="John Doe"
                 jobTitle="Analista QA | #OpenToWork"
                 timeAgo="1 día"
                 postContent={
