@@ -145,8 +145,9 @@ export const HeroPage = () => {
               FAQs
             </Link>
             <Link
-              href="#pricing"
+              href="/community"
               className="text-gray-600 hover:text-blue-900 hover:underline"
+              target="_blank"
             >
               Comunidades
             </Link>
