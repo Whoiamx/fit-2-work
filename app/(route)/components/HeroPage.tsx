@@ -148,7 +148,7 @@ export const HeroPage = () => {
               href="#pricing"
               className="text-gray-600 hover:text-blue-900 hover:underline"
             >
-              Sobre Nosotros
+              Comunidades
             </Link>
           </nav>
         </div>
@@ -176,7 +176,6 @@ export const HeroPage = () => {
                 className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3"
               >
                 Comenzar Ahora
-                <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
             <Button
