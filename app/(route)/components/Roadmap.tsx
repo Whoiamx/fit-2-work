@@ -110,17 +110,15 @@ export const Roadmap = () => {
                     isEven ? "md:justify-start" : "md:justify-end"
                   }`}
                 >
-                  {/* Contenido de la tarjeta */}
-
                   <Card
-                    className={`relative w-full md:w-[calc(50%-2rem)] p-4 bg-gray-800 border border-gray-700 shadow-lg transition-all duration-300 hover:scale-[1.02]`}
+                    className={`relative w-full md:w-[calc(50%-2rem)] p-4 bg-gray-800 border border-gray-700 shadow-lg transition-all duration-300  hover:scale-[1.02]`}
                   >
                     <CardHeader className="p-0 pb-2 flex flex-row items-center gap-3">
                       <IconComponent className="w-5 h-5 text-white" />
 
                       <div>
                         <Link href={item.route} target="_blank">
-                          <CardTitle className="text-xl font-semibold text-white">
+                          <CardTitle className="text-xl font-semibold text-white hover:text-blue-500">
                             {item.title}
                           </CardTitle>
                         </Link>
