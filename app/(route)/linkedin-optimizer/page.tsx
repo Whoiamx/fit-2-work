@@ -1,5 +1,5 @@
-import { Chatbot } from "../components/Chatbot";
+import LinkedInOptimizer from "../components/LinkedinOptimizer";
 
 export default function LinkedinOptimizerPage() {
-  return <Chatbot />;
+  return <LinkedInOptimizer />;
 }
