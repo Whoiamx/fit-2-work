@@ -22,6 +22,8 @@ import {
   GraduationCap,
   Award,
   ListChecks,
+  CheckCircle,
+  XCircle,
 } from "lucide-react";
 import { Navbar } from "./Navbar";
 
@@ -42,8 +44,51 @@ interface LinkedInRecommendations {
   }>;
   skills: string[];
   certifications: string[];
-  tips: string[]; // <--- Aquí se añadió la propiedad 'tips'
+  tips: string[];
 }
+
+// --- Example Profile Data ---
+const goodProfileExample = {
+  headline:
+    "Senior Software Engineer | React, Node.js, AWS | Building Scalable Web Applications | #OpenToWork",
+  summary:
+    "Ingeniero de Software Senior altamente motivado con más de 7 años de experiencia en el desarrollo y despliegue de aplicaciones web robustas y escalables. Historial probado en liderar equipos multifuncionales, optimizar el rendimiento y entregar soluciones innovadoras. Apasionado por el código limpio, el aprendizaje continuo y la contribución a proyectos de impacto. Buscando roles desafiantes en entornos tecnológicos dinámicos.",
+  experience: [
+    {
+      title: "Senior Software Engineer",
+      company: "Tech Innovators Inc.",
+      description:
+        "Lideré el desarrollo de una nueva arquitectura de microservicios, reduciendo la latencia en un 20% y mejorando la fiabilidad del sistema. Mentoricé a desarrolladores junior e implementé pipelines de CI/CD.",
+    },
+  ],
+  skills: [
+    "React",
+    "Node.js",
+    "TypeScript",
+    "AWS",
+    "Docker",
+    "Metodologías Ágiles",
+    "Liderazgo",
+  ],
+  whyGood:
+    "Claro, conciso, usa palabras clave relevantes, destaca logros cuantificables, muestra liderazgo y habilidades demandadas. Incluye un llamado a la acción con #OpenToWork.",
+};
+
+const badProfileExample = {
+  headline: "Desarrollador",
+  summary: "Trabajo con computadoras. Me gusta programar. Busco trabajo.",
+  experience: [
+    {
+      title: "Programador",
+      company: "Empresa Antigua",
+      description: "Hice cosas de programación.",
+    },
+  ],
+  skills: ["Computadoras", "Internet", "Software"],
+  whyBad:
+    "Vago, sin detalles específicos, no usa palabras clave, no destaca logros ni responsabilidades. No es profesional y no atrae a reclutadores.",
+};
+// --- End Example Profile Data ---
 
 export default function LinkedInOptimizer() {
   const [aboutMe, setAboutMe] = useState("");
@@ -111,7 +156,6 @@ export default function LinkedInOptimizer() {
         "AWS Cloud Practitioner",
       ],
       tips: [
-        // <--- Aquí se definen los tips
         "Asegúrate de que tu foto de perfil sea profesional y amigable.",
         "Conecta con al menos 500 personas relevantes en tu industria.",
         "Publica contenido de valor regularmente para aumentar tu visibilidad.",
@@ -129,12 +173,157 @@ export default function LinkedInOptimizer() {
     setIsLoading(false);
   }, [aboutMe, experiences]);
 
+  const goToHome = () => {
+    alert("Navegando al inicio...");
+    // En una app real: router.push('/') o window.location.href = '/'
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
+      {/* Navegación Superior */}
       <Navbar />
 
+      {/* New Section: LinkedIn Profile Examples */}
+      <div className="container mx-auto p-6 space-y-8">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-3">
+            Ejemplos de Perfiles LinkedIn
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Compara un perfil optimizado con uno que necesita mejoras para
+            entender qué buscan los reclutadores.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Good Profile Example Card */}
+          <Card className="border-2 border-green-500 shadow-lg bg-green-50">
+            <CardHeader className="flex flex-row items-center space-x-3 p-4 pb-2">
+              <CheckCircle className="w-7 h-7 text-green-600" />
+              <CardTitle className="text-2xl text-green-800">
+                Perfil Óptimo
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-4 pt-0 space-y-4">
+              <div>
+                <h4 className="font-semibold text-green-700 mb-1">Titular:</h4>
+                <p className="text-green-900 font-medium">
+                  {goodProfileExample.headline}
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-green-700 mb-1">
+                  Acerca de:
+                </h4>
+                <p className="text-green-900 text-sm leading-relaxed">
+                  {goodProfileExample.summary}
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-green-700 mb-1">
+                  Experiencia (Ejemplo):
+                </h4>
+                <p className="text-green-900 text-sm">
+                  <span className="font-medium">
+                    {goodProfileExample.experience[0].title}
+                  </span>{" "}
+                  en {goodProfileExample.experience[0].company}
+                </p>
+                <p className="text-green-900 text-sm leading-relaxed mt-1">
+                  {goodProfileExample.experience[0].description}
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-green-700 mb-1">
+                  Habilidades Clave:
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {goodProfileExample.skills.map((skill, idx) => (
+                    <Badge
+                      key={idx}
+                      className="bg-green-200 text-green-800 border-green-400"
+                    >
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+              <div className="bg-green-100 border border-green-300 rounded-md p-3 mt-4">
+                <h4 className="font-semibold text-green-700 mb-1">
+                  ¿Por qué es bueno?
+                </h4>
+                <p className="text-green-800 text-sm">
+                  {goodProfileExample.whyGood}
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Bad Profile Example Card */}
+          <Card className="border-2 border-red-500 shadow-lg bg-red-50">
+            <CardHeader className="flex flex-row items-center space-x-3 p-4 pb-2">
+              <XCircle className="w-7 h-7 text-red-600" />
+              <CardTitle className="text-2xl text-red-800">
+                Perfil a Mejorar
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-4 pt-0 space-y-4">
+              <div>
+                <h4 className="font-semibold text-red-700 mb-1">Titular:</h4>
+                <p className="text-red-900 font-medium">
+                  {badProfileExample.headline}
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-red-700 mb-1">Acerca de:</h4>
+                <p className="text-red-900 text-sm leading-relaxed">
+                  {badProfileExample.summary}
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-red-700 mb-1">
+                  Experiencia (Ejemplo):
+                </h4>
+                <p className="text-red-900 text-sm">
+                  <span className="font-medium">
+                    {badProfileExample.experience[0].title}
+                  </span>{" "}
+                  en {badProfileExample.experience[0].company}
+                </p>
+                <p className="text-red-900 text-sm leading-relaxed mt-1">
+                  {badProfileExample.experience[0].description}
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-red-700 mb-1">
+                  Habilidades Clave:
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {badProfileExample.skills.map((skill, idx) => (
+                    <Badge
+                      key={idx}
+                      className="bg-red-200 text-red-800 border-red-400"
+                    >
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+              <div className="bg-red-100 border border-red-300 rounded-md p-3 mt-4">
+                <h4 className="font-semibold text-red-700 mb-1">
+                  ¿Por qué es malo?
+                </h4>
+                <p className="text-red-800 text-sm">
+                  {badProfileExample.whyBad}
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+
       <div className="flex flex-1 flex-col lg:flex-row p-6 gap-6">
-        {/* Panel Izquierdo - Formulario de Entrada */}
+        {/* Panel Izquierdo - Formularios de Entrada */}
         <div className="w-full lg:w-1/2 bg-white rounded-lg shadow-md p-6 overflow-y-auto">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">
             Ingresa tu Información de LinkedIn
@@ -439,7 +628,7 @@ export default function LinkedInOptimizer() {
                 </Card>
               )}
 
-              {/* Tips Generales - NEW SECTION */}
+              {/* Tips Generales */}
               {recommendations.tips.length > 0 && (
                 <Card className="bg-gray-50 border-gray-200">
                   <CardHeader className="flex flex-row items-center space-x-3 p-4 pb-2">
