@@ -173,11 +173,6 @@ export default function LinkedInOptimizer() {
     setIsLoading(false);
   }, [aboutMe, experiences]);
 
-  const goToHome = () => {
-    alert("Navegando al inicio...");
-    // En una app real: router.push('/') o window.location.href = '/'
-  };
-
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
       {/* Navegación Superior */}
