@@ -1,4 +1,4 @@
-import { LinkedInStrategy } from "../components/LinkedinStrategy";
+import { LinkedInStrategy } from "../../components/LinkedinStrategy";
 
 export default function LinkedinPage() {
   return (

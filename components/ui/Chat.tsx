@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Send, Copy, ChevronDown } from "lucide-react";
-import { Navbar } from "@/app/(route)/components/Navbar";
+import { Navbar } from "@/app/components/Navbar";
 
 interface Message {
   id: string;
