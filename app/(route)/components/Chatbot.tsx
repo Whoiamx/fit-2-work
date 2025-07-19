@@ -13,9 +13,21 @@ interface Message {
 
 export const Chatbot = () => {
   const [messages, setMessages] = useState<Message[]>([]);
+  const [ctaShown, setCtaShown] = useState(false);
+  const [redirectShown, setRedirectShown] = useState(false);
+
+  useEffect(() => {
+    const welcomeMessage: Message = {
+      id: crypto.randomUUID(),
+      content:
+        "¡Hola! Soy Fito, tu asesor inteligente de Fit2Work 😊 Estoy acá para ayudarte a preparar tus entrevistas de trabajo y que tengas éxito.",
+      role: "assistant",
+      timestamp: new Date(),
+    };
+    setMessages([welcomeMessage]);
+  }, []);
 
   const handleSendMessage = async (message: string) => {
-    // Agregamos el mensaje del usuario
     const userMessage: Message = {
       id: crypto.randomUUID(),
       content: message,
@@ -28,22 +40,43 @@ export const Chatbot = () => {
       const result = await simulatorInterviewUseCase(message);
       const { message: assistantMsg } = result;
 
-      const assistantMessages = [
-        assistantMsg.message,
-        ...assistantMsg.sugerency,
-        assistantMsg.call_to_action,
-        assistantMsg.finally,
-      ].map((text) => ({
-        id: crypto.randomUUID(),
-        content: text,
-        role: "assistant" as const,
-        timestamp: new Date(),
-      }));
+      const assistantMessages: Message[] = [];
+
+      // Agrega sugerencias
+      assistantMsg.sugerency.forEach((s: any) => {
+        assistantMessages.push({
+          id: crypto.randomUUID(),
+          content: s,
+          role: "assistant",
+          timestamp: new Date(),
+        });
+      });
+
+      // call_to_action (una sola vez)
+      if (assistantMsg.call_to_action && !ctaShown) {
+        assistantMessages.push({
+          id: crypto.randomUUID(),
+          content: assistantMsg.call_to_action,
+          role: "assistant",
+          timestamp: new Date(),
+        });
+        setCtaShown(true);
+      }
+
+      // redirect_message (una sola vez)
+      if (assistantMsg.redirect_message && !redirectShown) {
+        assistantMessages.push({
+          id: crypto.randomUUID(),
+          content: assistantMsg.redirect_message,
+          role: "assistant",
+          timestamp: new Date(),
+        });
+        setRedirectShown(true);
+      }
 
       setMessages((prev) => [...prev, ...assistantMessages]);
     } catch (error) {
       console.error("Error al obtener respuesta del simulador:", error);
-      // Opcional: mostrar mensaje de error como mensaje del asistente
       setMessages((prev) => [
         ...prev,
         {

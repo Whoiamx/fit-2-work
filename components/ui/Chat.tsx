@@ -27,7 +27,7 @@ interface ChatProps {
 }
 
 export default function Chat({
-  title = "Fit2Work Chatbot",
+  title = "Fito Chatbot Inteligente",
   subtitle = "Asistente de búsqueda laboral",
   messages = [],
   onSendMessage,
@@ -41,7 +41,6 @@ export default function Chat({
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Auto scroll al final cuando cambian los mensajes
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -53,7 +52,6 @@ export default function Chat({
     setInputValue("");
     setIsTyping(true);
 
-    // Simula tiempo de tipeo
     setTimeout(() => setIsTyping(false), 1000);
   };
 
@@ -69,7 +67,7 @@ export default function Chat({
       className={`flex flex-col h-screen bg-gray-900 text-white ${className}`}
     >
       <Navbar />
-      {/* Header */}
+
       <header className="flex items-center justify-between p-4 border-b border-gray-700">
         <div className="flex items-center space-x-2">
           <Button variant="ghost" className="text-white hover:bg-gray-800">
@@ -77,13 +75,11 @@ export default function Chat({
             <ChevronDown className="w-4 h-4 ml-1" />
           </Button>
         </div>
-
         <div className="flex items-center space-x-2 text-sm text-gray-400">
           <span>{subtitle}</span>
         </div>
       </header>
 
-      {/* Messages Area */}
       <div className="flex-1 overflow-y-auto p-4 space-y-6">
         {messages.map((msg) => (
           <div
@@ -139,11 +135,9 @@ export default function Chat({
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input Area */}
       <div className="p-4 border-t border-gray-700">
         <div className="relative">
           <div className="flex items-center space-x-2 bg-gray-800 rounded-lg p-3">
-            {/* Input Field */}
             <Input
               ref={inputRef}
               value={inputValue}
@@ -155,8 +149,6 @@ export default function Chat({
               autoComplete="off"
               autoFocus
             />
-
-            {/* Action Buttons */}
             <div className="flex items-center space-x-2">
               <Button
                 onClick={handleSendMessage}
@@ -170,8 +162,6 @@ export default function Chat({
             </div>
           </div>
         </div>
-
-        {/* Disclaimer */}
         <p className="text-xs text-gray-500 text-center mt-2">
           Fit2Work Chatbot puede cometer errores. Considera verificar la
           información importante.
