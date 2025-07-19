@@ -1,7 +1,7 @@
 export const simulatorInterviewUseCase = async (prompt: string) => {
   try {
     const response = await fetch(
-      `http://localhost:3005/gpt/simulator-interview`,
+      `http://localhost:3009/gpt/simulator-interview`,
       {
         method: "POST",
         headers: {

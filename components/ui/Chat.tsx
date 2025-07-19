@@ -3,9 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-
-import { Send, Copy, ThumbsUp, ThumbsDown, ChevronDown } from "lucide-react";
-
+import { Send, Copy, ChevronDown } from "lucide-react";
 import { Navbar } from "@/app/(route)/components/Navbar";
 
 interface Message {
@@ -22,8 +20,7 @@ interface ChatProps {
   messages?: Message[];
   onSendMessage?: (message: string) => void;
   onMessageAction?: (messageId: string, action: string) => void;
-  className?: string;
-  showTools?: boolean;
+  loadingMessage?: string;
 }
 
 export default function Chat({
@@ -32,8 +29,7 @@ export default function Chat({
   messages = [],
   onSendMessage,
   onMessageAction,
-  className = "",
-  showTools = true,
+  loadingMessage,
   placeholder = "Escribí tu mensaje...",
 }: ChatProps) {
   const [inputValue, setInputValue] = useState("");
@@ -47,12 +43,10 @@ export default function Chat({
 
   const handleSendMessage = () => {
     if (!inputValue.trim()) return;
-
     onSendMessage?.(inputValue.trim());
     setInputValue("");
     setIsTyping(true);
-
-    setTimeout(() => setIsTyping(false), 1000);
+    setTimeout(() => setIsTyping(false), 10000);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -63,11 +57,8 @@ export default function Chat({
   };
 
   return (
-    <div
-      className={`flex flex-col h-screen bg-gray-900 text-white ${className}`}
-    >
+    <div className={`flex flex-col h-screen bg-gray-900 text-white }`}>
       <Navbar />
-
       <header className="flex items-center justify-between p-4 border-b border-gray-700">
         <div className="flex items-center space-x-2">
           <Button variant="ghost" className="text-white hover:bg-gray-800">
@@ -98,7 +89,6 @@ export default function Chat({
               >
                 <p className="whitespace-pre-wrap">{msg.content}</p>
               </div>
-
               {msg.role === "assistant" && (
                 <div className="flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity mt-1">
                   <Button
@@ -118,20 +108,24 @@ export default function Chat({
 
         {isTyping && (
           <div className="flex items-start space-x-3">
-            <div className="flex space-x-1 items-center">
-              <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-              <div
-                className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                style={{ animationDelay: "0.1s" }}
-              ></div>
-              <div
-                className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                style={{ animationDelay: "0.2s" }}
-              ></div>
+            <div className="flex flex-col space-y-1">
+              <div className="bg-gray-800 text-gray-100 rounded-lg p-3 max-w-md">
+                <p className="whitespace-pre-wrap">{loadingMessage}</p>
+              </div>
+              <div className="flex space-x-1 items-center ml-1 mt-1">
+                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                <div
+                  className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                  style={{ animationDelay: "0.1s" }}
+                ></div>
+                <div
+                  className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                  style={{ animationDelay: "0.2s" }}
+                ></div>
+              </div>
             </div>
           </div>
         )}
-
         <div ref={messagesEndRef} />
       </div>
 
@@ -149,17 +143,15 @@ export default function Chat({
               autoComplete="off"
               autoFocus
             />
-            <div className="flex items-center space-x-2">
-              <Button
-                onClick={handleSendMessage}
-                disabled={!inputValue.trim()}
-                size="sm"
-                className="bg-white text-gray-900 hover:bg-gray-200 disabled:bg-gray-600 disabled:text-gray-400 p-2"
-                aria-label="Enviar mensaje"
-              >
-                <Send className="w-4 h-4" />
-              </Button>
-            </div>
+            <Button
+              onClick={handleSendMessage}
+              disabled={!inputValue.trim()}
+              size="sm"
+              className="bg-white text-gray-900 hover:bg-gray-200 disabled:bg-gray-600 disabled:text-gray-400 p-2"
+              aria-label="Enviar mensaje"
+            >
+              <Send className="w-4 h-4" />
+            </Button>
           </div>
         </div>
         <p className="text-xs text-gray-500 text-center mt-2">

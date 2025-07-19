@@ -13,14 +13,14 @@ interface Message {
 
 export const Chatbot = () => {
   const [messages, setMessages] = useState<Message[]>([]);
-  const [ctaShown, setCtaShown] = useState(false);
-  const [redirectShown, setRedirectShown] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState("");
 
   useEffect(() => {
     const welcomeMessage: Message = {
       id: crypto.randomUUID(),
       content:
-        "¡Hola! Soy Fito, tu asesor inteligente de Fit2Work 😊 Estoy acá para ayudarte a preparar tus entrevistas de trabajo y que tengas éxito.",
+        "Hola, soy Fito, tu asesor inteligente para prepararte en entrevistas laborales. ¿Para qué puesto querés prepararte? 😊",
       role: "assistant",
       timestamp: new Date(),
     };
@@ -34,44 +34,50 @@ export const Chatbot = () => {
       role: "user",
       timestamp: new Date(),
     };
+
     setMessages((prev) => [...prev, userMessage]);
+    setIsTyping(true);
+    setLoadingMessage(
+      "A continuación te voy a generar posibles preguntas y consejos para el puesto al que estás apuntando..."
+    );
 
     try {
       const result = await simulatorInterviewUseCase(message);
-      const { message: assistantMsg } = result;
 
       const assistantMessages: Message[] = [];
 
-      // Agrega sugerencias
-      assistantMsg.sugerency.forEach((s: any) => {
+      if (result.message.error) {
         assistantMessages.push({
           id: crypto.randomUUID(),
-          content: s,
+          content: result.message.error,
           role: "assistant",
           timestamp: new Date(),
         });
-      });
+      } else {
+        result.message.questions.forEach((q: string, index: number) => {
+          assistantMessages.push({
+            id: crypto.randomUUID(),
+            content: `🧠 ${q}\n💡 ${result.message.recommended_answers[index]}`,
+            role: "assistant",
+            timestamp: new Date(),
+          });
+        });
 
-      // call_to_action (una sola vez)
-      if (assistantMsg.call_to_action && !ctaShown) {
-        assistantMessages.push({
-          id: crypto.randomUUID(),
-          content: assistantMsg.call_to_action,
-          role: "assistant",
-          timestamp: new Date(),
+        result.message.tips.forEach((tip: string) => {
+          assistantMessages.push({
+            id: crypto.randomUUID(),
+            content: `✅ Consejo: ${tip}`,
+            role: "assistant",
+            timestamp: new Date(),
+          });
         });
-        setCtaShown(true);
-      }
 
-      // redirect_message (una sola vez)
-      if (assistantMsg.redirect_message && !redirectShown) {
         assistantMessages.push({
           id: crypto.randomUUID(),
-          content: assistantMsg.redirect_message,
+          content: result.message.next_step,
           role: "assistant",
           timestamp: new Date(),
         });
-        setRedirectShown(true);
       }
 
       setMessages((prev) => [...prev, ...assistantMessages]);
@@ -87,6 +93,9 @@ export const Chatbot = () => {
           timestamp: new Date(),
         },
       ]);
+    } finally {
+      setIsTyping(false);
+      setLoadingMessage("");
     }
   };
 
@@ -102,6 +111,7 @@ export const Chatbot = () => {
         onSendMessage={handleSendMessage}
         onMessageAction={handleMessageAction}
         messages={messages}
+        loadingMessage={loadingMessage}
       />
     </div>
   );
