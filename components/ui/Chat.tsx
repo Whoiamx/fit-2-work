@@ -4,15 +4,8 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-import {
-  Send,
-  Mic,
-  Copy,
-  ThumbsUp,
-  ThumbsDown,
-  RotateCcw,
-  ChevronDown,
-} from "lucide-react";
+import { Send, Copy, ThumbsUp, ThumbsDown, ChevronDown } from "lucide-react";
+
 import { Navbar } from "@/app/(route)/components/Navbar";
 
 interface Message {
@@ -20,92 +13,55 @@ interface Message {
   content: string;
   role: "user" | "assistant";
   timestamp: Date;
-  isTyping?: boolean;
 }
 
 interface ChatProps {
   title?: string;
   subtitle?: string;
   placeholder?: string;
-  initialMessage?: string;
+  messages?: Message[];
   onSendMessage?: (message: string) => void;
   onMessageAction?: (messageId: string, action: string) => void;
   className?: string;
   showTools?: boolean;
-  tools?: Array<{ id: string; name: string; icon?: any }>;
 }
 
 export default function Chat({
   title = "Fit2Work Chatbot",
   subtitle = "Asistente de búsqueda laboral",
-  placeholder = "Pregunta lo que quieras sobre tu búsqueda laboral...",
-  initialMessage = "¡Hola! Soy tu asistente de búsqueda laboral con IA. ¿En qué te puedo ayudar hoy? 😊",
+  messages = [],
   onSendMessage,
   onMessageAction,
   className = "",
   showTools = true,
-  tools = [],
+  placeholder = "Escribí tu mensaje...",
 }: ChatProps) {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: "1",
-      content: initialMessage,
-      role: "assistant",
-      timestamp: new Date(),
-    },
-  ]);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
+  // Auto scroll al final cuando cambian los mensajes
   useEffect(() => {
-    scrollToBottom();
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleSendMessage = async () => {
+  const handleSendMessage = () => {
     if (!inputValue.trim()) return;
 
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      content: inputValue,
-      role: "user",
-      timestamp: new Date(),
-    };
-
-    setMessages((prev) => [...prev, userMessage]);
+    onSendMessage?.(inputValue.trim());
     setInputValue("");
-
-    // Callback para manejar el mensaje
-    if (onSendMessage) {
-      onSendMessage(inputValue);
-    }
-
-    // Simular respuesta de IA
     setIsTyping(true);
-    setTimeout(() => {
-      const aiResponse: Message = {
-        id: (Date.now() + 1).toString(),
-        content:
-          "Entiendo tu consulta. Te ayudo con eso de inmediato. ¿Podrías darme más detalles específicos?",
-        role: "assistant",
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, aiResponse]);
-      setIsTyping(false);
-    }, 1500);
+
+    // Simula tiempo de tipeo
+    setTimeout(() => setIsTyping(false), 1000);
   };
 
-  const handleMessageAction = (messageId: string, action: string) => {
-    if (onMessageAction) {
-      onMessageAction(messageId, action);
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
     }
-    // Aquí puedes agregar lógica específica para cada acción
-    console.log(`Acción ${action} en mensaje ${messageId}`);
   };
 
   return (
@@ -125,64 +81,38 @@ export default function Chat({
         <div className="flex items-center space-x-2 text-sm text-gray-400">
           <span>{subtitle}</span>
         </div>
-
-        <div className="flex items-center space-x-2">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-gray-400 hover:text-white hover:bg-gray-800"
-          ></Button>
-        </div>
       </header>
 
       {/* Messages Area */}
       <div className="flex-1 overflow-y-auto p-4 space-y-6">
-        {messages.map((message) => (
-          <div key={message.id} className="flex items-start space-x-3">
-            {/* Message Content */}
-            <div className="flex-1 space-y-2">
-              <div className="bg-transparent">
-                <p className="text-gray-100 leading-relaxed">
-                  {message.content}
-                </p>
+        {messages.map((msg) => (
+          <div
+            key={msg.id}
+            className={`flex items-start space-x-3 group ${
+              msg.role === "user" ? "justify-end" : "justify-start"
+            }`}
+          >
+            <div className="flex-1 max-w-xl space-y-2">
+              <div
+                className={`rounded-lg p-3 ${
+                  msg.role === "user"
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-800 text-gray-100"
+                }`}
+              >
+                <p className="whitespace-pre-wrap">{msg.content}</p>
               </div>
 
-              {/* Message Actions (solo para mensajes del asistente) */}
-              {message.role === "assistant" && (
-                <div className="flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              {msg.role === "assistant" && (
+                <div className="flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition-opacity mt-1">
                   <Button
                     variant="ghost"
                     size="sm"
                     className="text-gray-400 hover:text-white hover:bg-gray-800 p-1 h-8 w-8"
-                    onClick={() => handleMessageAction(message.id, "copy")}
+                    onClick={() => onMessageAction?.(msg.id, "copy")}
+                    aria-label="Copiar mensaje"
                   >
                     <Copy className="w-3 h-3" />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-gray-400 hover:text-white hover:bg-gray-800 p-1 h-8 w-8"
-                    onClick={() => handleMessageAction(message.id, "like")}
-                  >
-                    <ThumbsUp className="w-3 h-3" />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-gray-400 hover:text-white hover:bg-gray-800 p-1 h-8 w-8"
-                    onClick={() => handleMessageAction(message.id, "dislike")}
-                  >
-                    <ThumbsDown className="w-3 h-3" />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-gray-400 hover:text-white hover:bg-gray-800 p-1 h-8 w-8"
-                    onClick={() =>
-                      handleMessageAction(message.id, "regenerate")
-                    }
-                  >
-                    <RotateCcw className="w-3 h-3" />
                   </Button>
                 </div>
               )}
@@ -190,7 +120,6 @@ export default function Chat({
           </div>
         ))}
 
-        {/* Typing Indicator */}
         {isTyping && (
           <div className="flex items-start space-x-3">
             <div className="flex space-x-1 items-center">
@@ -214,32 +143,27 @@ export default function Chat({
       <div className="p-4 border-t border-gray-700">
         <div className="relative">
           <div className="flex items-center space-x-2 bg-gray-800 rounded-lg p-3">
-            {/* Tools Button */}
-            {showTools && <div className="flex items-center space-x-2"></div>}
-
             {/* Input Field */}
             <Input
               ref={inputRef}
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={handleKeyDown}
               placeholder={placeholder}
               className="flex-1 bg-transparent border-none text-white placeholder-gray-400 focus:ring-0 focus:outline-none"
+              spellCheck={false}
+              autoComplete="off"
+              autoFocus
             />
 
             {/* Action Buttons */}
             <div className="flex items-center space-x-2">
               <Button
-                variant="ghost"
-                size="sm"
-                className="text-gray-400 hover:text-white hover:bg-gray-700 p-2"
-              >
-                <Mic className="w-4 h-4" />
-              </Button>
-              <Button
                 onClick={handleSendMessage}
                 disabled={!inputValue.trim()}
                 size="sm"
                 className="bg-white text-gray-900 hover:bg-gray-200 disabled:bg-gray-600 disabled:text-gray-400 p-2"
+                aria-label="Enviar mensaje"
               >
                 <Send className="w-4 h-4" />
               </Button>

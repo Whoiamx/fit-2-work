@@ -1,37 +1,74 @@
 "use client";
 
 import Chat from "@/components/ui/Chat";
-import { User, MessageSquare, FileText, Linkedin } from "lucide-react";
+import { simulatorInterviewUseCase } from "@/lib/use-cases/simulator.usecase";
+import { useEffect, useState } from "react";
+
+interface Message {
+  id: string;
+  content: string;
+  role: "user" | "assistant";
+  timestamp: Date;
+}
 
 export const Chatbot = () => {
-  const handleSendMessage = (message: string) => {
-    console.log("Mensaje enviado:", message);
-    // Aquí puedes agregar lógica para procesar el mensaje
+  const [messages, setMessages] = useState<Message[]>([]);
+
+  const handleSendMessage = async (message: string) => {
+    // Agregamos el mensaje del usuario
+    const userMessage: Message = {
+      id: crypto.randomUUID(),
+      content: message,
+      role: "user",
+      timestamp: new Date(),
+    };
+    setMessages((prev) => [...prev, userMessage]);
+
+    try {
+      const result = await simulatorInterviewUseCase(message);
+      const { message: assistantMsg } = result;
+
+      const assistantMessages = [
+        assistantMsg.message,
+        ...assistantMsg.sugerency,
+        assistantMsg.call_to_action,
+        assistantMsg.finally,
+      ].map((text) => ({
+        id: crypto.randomUUID(),
+        content: text,
+        role: "assistant" as const,
+        timestamp: new Date(),
+      }));
+
+      setMessages((prev) => [...prev, ...assistantMessages]);
+    } catch (error) {
+      console.error("Error al obtener respuesta del simulador:", error);
+      // Opcional: mostrar mensaje de error como mensaje del asistente
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: crypto.randomUUID(),
+          content:
+            "Lo siento, hubo un error al obtener la respuesta. Por favor, intenta nuevamente.",
+          role: "assistant",
+          timestamp: new Date(),
+        },
+      ]);
+    }
   };
 
   const handleMessageAction = (messageId: string, action: string) => {
     console.log(`Acción ${action} en mensaje ${messageId}`);
-    // Aquí puedes agregar lógica para manejar las acciones
   };
-
-  const customTools = [
-    { id: "cv-creator", name: "Crear CV", icon: FileText },
-    { id: "interview-prep", name: "Entrevista", icon: MessageSquare },
-    { id: "linkedin-help", name: "LinkedIn", icon: Linkedin },
-    { id: "cover-letter", name: "Carta", icon: User },
-  ];
 
   return (
     <div className="h-screen">
       <Chat
         title="Fit2Work Chatbot"
         subtitle="Tu asistente de búsqueda laboral"
-        placeholder="Pregunta sobre CVs, entrevistas, LinkedIn..."
-        initialMessage="¡Hola! Soy tu asistente especializado en búsqueda laboral. Puedo ayudarte con CVs, preparación de entrevistas, optimización de LinkedIn y mucho más. ¿En qué te puedo ayudar hoy? 😊"
         onSendMessage={handleSendMessage}
         onMessageAction={handleMessageAction}
-        showTools={true}
-        tools={customTools}
+        messages={messages}
       />
     </div>
   );
