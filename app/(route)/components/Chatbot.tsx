@@ -106,7 +106,7 @@ export const Chatbot = () => {
   return (
     <div className="h-screen">
       <Chat
-        title="Fit2Work Chatbot"
+        title="Fito Chatbot"
         subtitle="Tu asistente de búsqueda laboral"
         onSendMessage={handleSendMessage}
         onMessageAction={handleMessageAction}
