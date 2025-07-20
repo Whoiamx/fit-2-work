@@ -39,19 +39,12 @@ Adjunto mi currículum vitae para su consideración y espero tener la oportunida
 Atentamente,
 [Tu Nombre]`
   );
-  const [score, setScore] = useState(3); // 3 estrellas por defecto
-  const [modificationProposals, setModificationProposals] = useState([
-    "Puedes ingresar tus años de experiencia laboral.",
-    "Escribe logros destacados en el trabajo.",
-    "Gracias por considerar mi aplicación. He adjuntado mi currículum para su revisión.",
-  ]);
 
   const MAX_COMPANY_POSITION = 500;
   const MAX_WORK_EXPERIENCE = 800;
   const MAX_EDUCATION_BACKGROUND = 500;
 
   const handleRegenerate = useCallback(() => {
-    // Simular la generación de una nueva carta
     const newLetter = `Estimado/a Gerente de Contratación,
 
 Me dirijo a usted con gran entusiasmo para expresar mi interés en la posición de ${
@@ -71,12 +64,7 @@ Estoy convencido/a de que mis habilidades y mi pasión por [mencionar área clav
 Saludos cordiales,
 [Tu Nombre]`;
     setGeneratedLetter(newLetter);
-    setScore(Math.floor(Math.random() * 5) + 1); // Puntuación aleatoria
-    setModificationProposals([
-      "Asegúrate de personalizar el saludo con el nombre del gerente si es posible.",
-      "Incluye métricas o resultados cuantificables en tu experiencia laboral.",
-      "Adapta el párrafo final para reflejar la cultura de la empresa.",
-    ]);
+
     alert("Carta de presentación regenerada.");
   }, [companyPosition, workExperience, educationBackground]);
 
