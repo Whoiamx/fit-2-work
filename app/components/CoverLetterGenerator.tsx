@@ -18,14 +18,14 @@ import { Navbar } from "./Navbar";
 
 export const CoverLetterGenerator = () => {
   const [companyPosition, setCompanyPosition] = useState({
-    company: "Creative Solutions Inc.",
-    position: "Software Engineer",
+    company: "Ejemplo: Creative Solutions Inc.",
+    position: "Ejemplo: Software Engineer",
   });
   const [workExperience, setWorkExperience] = useState(
-    "Como Ingeniero de Software en Tech Innovators, he desarrollado soluciones de software robustas que mejoran la experiencia del usuario y el rendimiento del sistema. En mi rol anterior en Web Solutions Ltd. durante tres años, lideré un equipo en la implementación de una nueva arquitectura de microservicios que redujo los tiempos de respuesta en un 25% y mejoró la escalabilidad. Soy experto en JavaScript, React, Node.js y bases de datos SQL/NoSQL. Busco aplicar mis habilidades en un entorno dinámico y contribuir al éxito de proyectos innovadores."
+    "Ejemplo: Como Ingeniero de Software en Tech Innovators, he desarrollado soluciones de software robustas que mejoran la experiencia del usuario y el rendimiento del sistema. En mi rol anterior en Web Solutions Ltd. durante tres años, lideré un equipo en la implementación de una nueva arquitectura de microservicios que redujo los tiempos de respuesta en un 25% y mejoró la escalabilidad. Soy experto en JavaScript, React, Node.js y bases de datos SQL/NoSQL. Busco aplicar mis habilidades en un entorno dinámico y contribuir al éxito de proyectos innovadores."
   );
   const [educationBackground, setEducationBackground] = useState(
-    "Tengo una Licenciatura en Ciencias de la Computación de la Universidad Tecnológica Nacional, que completé en Mayo de 2020. Para mejorar mis habilidades, obtuve una certificación en Computación en la Nube de Google Cloud en 2022 y un diplomado en Inteligencia Artificial en 2023."
+    "Ejemplo: Tengo una Licenciatura en Ciencias de la Computación de la Universidad Tecnológica Nacional, que completé en Mayo de 2020. Para mejorar mis habilidades, obtuve una certificación en Computación en la Nube de Google Cloud en 2022 y un diplomado en Inteligencia Artificial en 2023."
   );
   const [language, setLanguage] = useState("Español");
 
@@ -107,8 +107,7 @@ Saludos cordiales,
               </div>
               <Input
                 id="company-name"
-                placeholder="Empresa: Creative Solutions Inc."
-                value={companyPosition.company}
+                placeholder={companyPosition.company}
                 onChange={(e) =>
                   setCompanyPosition((prev) => ({
                     ...prev,
@@ -119,8 +118,7 @@ Saludos cordiales,
               />
               <Input
                 id="position-name"
-                placeholder="Puesto: Software Engineer"
-                value={companyPosition.position}
+                placeholder={companyPosition.position}
                 onChange={(e) =>
                   setCompanyPosition((prev) => ({
                     ...prev,
@@ -145,8 +143,7 @@ Saludos cordiales,
               </div>
               <Textarea
                 id="work-experience"
-                placeholder="Describe tu experiencia laboral y habilidades clave..."
-                value={workExperience}
+                placeholder={workExperience}
                 onChange={(e) => setWorkExperience(e.target.value)}
                 className="min-h-[150px] resize-y"
               />
@@ -167,8 +164,7 @@ Saludos cordiales,
               </div>
               <Textarea
                 id="education-background"
-                placeholder="Describe tu formación académica y certificaciones..."
-                value={educationBackground}
+                placeholder={educationBackground}
                 onChange={(e) => setEducationBackground(e.target.value)}
                 className="min-h-[100px] resize-y"
               />
