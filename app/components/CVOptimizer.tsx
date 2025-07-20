@@ -293,20 +293,6 @@ export const CVOptimizer = () => {
         >
           Analizar CV
         </Button>
-
-        {/* Footer Info */}
-        <div className="text-center space-y-2">
-          <p className="text-sm text-gray-600">
-            ¿Tienes dudas sobre cómo funciona el optimizador?
-          </p>
-          <Button
-            variant="link"
-            className="text-blue-600 hover:text-blue-800 p-0"
-          >
-            <Info className="w-4 h-4 mr-1" />
-            Ver información detallada
-          </Button>
-        </div>
       </div>
     </div>
   );
