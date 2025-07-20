@@ -185,8 +185,7 @@ Saludos cordiales,
               onClick={handleRegenerate}
               className="w-full bg-green-700 hover:bg-green-600 text-white py-3"
             >
-              <RefreshCcw className="w-4 h-4 mr-2" />
-              Re-Generar
+              Generar Carta de Presentación
             </Button>
           </div>
         </div>
