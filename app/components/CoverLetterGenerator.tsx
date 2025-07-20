@@ -105,7 +105,7 @@ Idioma: ${language}
                 </span>
               </div>
               <Input
-                placeholder="Ej: Universal Assistance"
+                placeholder="Ej: Meta"
                 value={companyPosition.company}
                 maxLength={MAX_COMPANY_POSITION}
                 onChange={(e) =>
