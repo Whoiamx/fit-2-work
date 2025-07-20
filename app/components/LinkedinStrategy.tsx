@@ -142,6 +142,7 @@ export const LinkedInStrategy = () => {
     resetInterval(); // Reset the interval timer on manual interaction
   }, [resetInterval]);
 
+  // Funcion que controla la generación de contenido (mockeada)
   const handleGenerateContent = useCallback(async () => {
     if (!jobRole.trim() || !industry.trim()) {
       alert(
@@ -203,13 +204,13 @@ export const LinkedInStrategy = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
-      {/* Navegación Superior */}
       <Navbar />
       <div className="flex flex-1 flex-col lg:flex-row p-6 gap-6">
         {/* Panel Izquierdo - Formularios de Entrada */}
-        <div className="w-full lg:w-1/2 bg-white rounded-lg shadow-md p-6 overflow-y-auto">
+        <div className="w-full flex flex-col gap-8 lg:w-1/2 bg-white rounded-lg shadow-md p-6 overflow-y-auto">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">
-            Define tu Estrategia en LinkedIn
+            Define tu Estrategia en LinkedIn para Mejorar tu{" "}
+            <u className="text-blue-600 font-bold"> {""} Visibilidad</u>
           </h2>
 
           {/* Sección de Contenido */}
@@ -351,6 +352,24 @@ export const LinkedInStrategy = () => {
               </Button>
             </CardContent>
           </Card>
+
+          {generalStrategyTips.length > 0 && (
+            <Card className="bg-green-50 border-green-200">
+              <CardHeader className="flex flex-row items-center space-x-3 p-4 pb-2">
+                <Lightbulb className="w-6 h-6 text-green-600" />
+                <CardTitle className="text-xl text-green-900">
+                  Tips Generales para tu Estrategia
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-4 pt-0">
+                <ul className="list-disc list-inside text-green-700 space-y-1">
+                  {generalStrategyTips.map((tip, index) => (
+                    <li key={index}>{tip}</li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          )}
         </div>
 
         {/* Panel Derecho - Recomendaciones y Tips */}
@@ -411,23 +430,6 @@ export const LinkedInStrategy = () => {
               )}
 
               {/* Tips Generales de Estrategia */}
-              {generalStrategyTips.length > 0 && (
-                <Card className="bg-green-50 border-green-200">
-                  <CardHeader className="flex flex-row items-center space-x-3 p-4 pb-2">
-                    <Lightbulb className="w-6 h-6 text-green-600" />
-                    <CardTitle className="text-xl text-green-900">
-                      Tips Generales para tu Estrategia
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="p-4 pt-0">
-                    <ul className="list-disc list-inside text-green-700 space-y-1">
-                      {generalStrategyTips.map((tip, index) => (
-                        <li key={index}>{tip}</li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
-              )}
 
               {!generatedPostIdeas.length && (
                 <div className="text-center text-gray-500 py-12">
