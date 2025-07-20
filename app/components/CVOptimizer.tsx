@@ -104,9 +104,6 @@ export const CVOptimizer = () => {
           <h1 className="text-2xl font-bold text-gray-900">
             ¿Qué podes esperar de nuestro optimizador de CV?
           </h1>
-          <Button variant="link" className="text-blue-600 hover:text-blue-800">
-            Ver más
-          </Button>
         </div>
 
         {/* Expectativas */}
