@@ -2,6 +2,7 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import { Linkedin, Clock, MoreHorizontal } from "lucide-react";
 
 interface LinkedInPostCardProps {
@@ -23,13 +24,20 @@ export const LinkedInPostCard = ({
     <Card className="w-full max-w-xl mx-auto shadow-2xl rounded-lg border-none ">
       <CardContent className="p-4">
         <div className="flex items-center space-x-3 mb-3">
-          <Avatar className="w-10 h-10">
-            <AvatarImage
-              src={avatarSrc || "/placeholder.svg"}
-              alt={`Avatar de ${fullName}`}
-            />
-            <AvatarFallback>{fullName.charAt(0)}</AvatarFallback>
-          </Avatar>
+          <div
+            className={cn(
+              "relative rounded-full p-[2px]", // Padding for the border effect
+              "border-2 border-green-500" // Green border
+            )}
+          >
+            <Avatar className="w-10 h-10">
+              <AvatarImage
+                src={avatarSrc || "/placeholder.svg"}
+                alt={`Avatar de ${fullName}`}
+              />
+              <AvatarFallback>{fullName.charAt(0)}</AvatarFallback>
+            </Avatar>
+          </div>
           <div className="flex-1">
             <div className="flex items-center space-x-1">
               <span className="font-semibold text-gray-900">{fullName}</span>

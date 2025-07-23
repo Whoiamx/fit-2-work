@@ -1,7 +1,9 @@
 "use client";
 
 import Chat from "@/components/ui/Chat";
+import { createThreadUseCase } from "@/lib/use-cases/create-thread.use-case";
 import { simulatorInterviewUseCase } from "@/lib/use-cases/simulator.usecase";
+
 import { useEffect, useState } from "react";
 
 interface Message {
@@ -15,6 +17,33 @@ export const Chatbot = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState("");
+
+  // Assistant AI code
+
+  const [threadId, setThreadId] = useState<string>("");
+
+  useEffect(() => {
+    const threadId = localStorage.getItem("threadId");
+    if (threadId) {
+      setThreadId(threadId);
+    } else {
+      createThreadUseCase()
+        .then((id) => {
+          console.log("Nuevo threadId:", id);
+          setThreadId(id);
+          localStorage.setItem("threadId", id);
+        })
+        .catch((err) => {
+          console.error("Error al crear thread:", err);
+        });
+    }
+  }, []);
+
+  // useEffect(() => {
+  //   setMessages((prev) => {...prev,{text:}});
+  // }, []);
+
+  //OTHER CODE PREVIOUSLY ASSISTANT
 
   useEffect(() => {
     const welcomeMessage: Message = {
