@@ -6,10 +6,16 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Trash2, Plus } from "lucide-react";
-import { PDFDownloadLink } from "@react-pdf/renderer";
 
 import { Navbar } from "./Navbar";
-import { ResumePDF } from "@/components/ui/pdf-file";
+
+import dynamic from "next/dynamic";
+const PdfDownloadButton = dynamic(
+  () => import("./PDFDownloadButton").then((mod) => mod.PdfDownloadButton),
+  {
+    ssr: false,
+  }
+);
 
 interface PersonalInfo {
   fullName: string;
@@ -184,7 +190,6 @@ export const CVCreator = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       <Navbar />
-
       <div className="flex h-screen">
         {/* Panel Izquierdo - Formulario */}
         <div className="w-1/2 bg-gray-800 text-white overflow-y-auto">
@@ -193,53 +198,19 @@ export const CVCreator = () => {
             <div className="flex items-center justify-between mb-4">
               <h1 className="text-xl font-semibold">Constructor de CV</h1>
             </div>
-
             {/* Botones de Exportación */}
             <div className="flex space-x-2">
-              <PDFDownloadLink
-                document={
-                  <ResumePDF
-                    personalInfo={{
-                      fullName: personalInfo.fullName,
-                      location: personalInfo.location,
-                      phone: personalInfo.phone,
-                      email: personalInfo.email,
-                      links: personalInfo.links,
-                    }}
-                    summary={summary}
-                    experience={experiences.map((exp) => ({
-                      jobTitle: exp.jobTitle,
-                      company: exp.company,
-                      startDate: exp.startDate,
-                      endDate: exp.endDate,
-                      description: exp.description,
-                    }))}
-                    education={education.map((edu) => ({
-                      degree: edu.degree,
-                      institution: edu.institution,
-                      startDate: edu.startDate,
-                      endDate: edu.endDate,
-                    }))}
-                    skills={skills}
-                  />
-                }
+              <PdfDownloadButton
+                personalInfo={personalInfo}
+                summary={summary}
+                experiences={experiences}
+                education={education}
+                skills={skills}
                 fileName={`${personalInfo.fullName.replace(
                   /\s+/g,
                   "_"
                 )}_CV.pdf`}
-                style={{
-                  textDecoration: "none",
-                  padding: "10px 20px",
-                  color: "#fff",
-                  backgroundColor: "#155DFC",
-                  borderRadius: 4,
-                  fontWeight: "bold",
-                }}
-              >
-                {({ loading }) =>
-                  loading ? "Generando PDF..." : "Descargar PDF"
-                }
-              </PDFDownloadLink>
+              />
             </div>
           </div>
 
