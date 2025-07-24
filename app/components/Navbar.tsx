@@ -1,15 +1,5 @@
 import { Button } from "@/components/ui/button";
-import {
-  ArrowLeft,
-  CheckCircle,
-  FileText,
-  Linkedin,
-  Mail,
-  MapPin,
-  MessageSquare,
-  Sparkles,
-  User,
-} from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -22,7 +12,7 @@ export const Navbar = () => {
             <div className="flex items-center space-x-3">
               <Link href="/" className="flex items-center space-x-2">
                 <span className="text-2xl font-bold text-gray-900">
-                  Fit<span className="text-blue-600">2</span>Work
+                  Fit<span className="text-blue-600 ">2</span>Work
                 </span>
               </Link>
 

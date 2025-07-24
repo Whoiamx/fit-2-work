@@ -8,8 +8,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Fit To Work - Potencia tu Carrera Profesional con IA",
-  description: "La plataforma para potenciar tu carrera profesional con IA",
+  title: "Fit 2 Work - Potencia tu Carrera Profesional con ayuda de la IA",
+  description:
+    "La plataforma para potenciar tu carrera profesional con ayuda de la  IA",
 };
 
 export default function RootLayout({
