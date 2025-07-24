@@ -702,10 +702,7 @@ export const CVCreator = () => {
 
         {/* Panel Derecho - Vista Previa del CV */}
         <div className="w-1/2 bg-gray-100 p-8 overflow-y-auto">
-          <div
-            className="max-w-2xl mx-auto bg-white shadow-lg"
-            style={{ aspectRatio: "8.5/11" }}
-          >
+          <div className="max-w-2xl mx-auto bg-white shadow-lg">
             <div className="p-8 h-full">
               {/* Encabezado */}
               <div className="text-center mb-6 pb-4 border-b-2 border-gray-800">
