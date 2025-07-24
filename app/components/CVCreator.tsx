@@ -11,6 +11,8 @@ import { Navbar } from "./Navbar";
 import { ResumePDF } from "@/components/ui/pdf-file";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 
+import dynamic from "next/dynamic";
+
 interface PersonalInfo {
   fullName: string;
   location: string;
@@ -42,6 +44,13 @@ interface Skills {
 }
 
 export const CVCreator = () => {
+  const PDFDownloadLink = dynamic(
+    () => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink),
+    {
+      ssr: false,
+      loading: () => <p>Loading...</p>,
+    }
+  );
   const [activeTab, setActiveTab] = useState("Personal");
   const [personalInfo, setPersonalInfo] = useState<PersonalInfo>({
     fullName: "Juan Pérez",
