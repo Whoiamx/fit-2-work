@@ -18,33 +18,6 @@ export const Chatbot = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState("");
 
-  // Assistant AI code
-
-  const [threadId, setThreadId] = useState<string>("");
-
-  useEffect(() => {
-    const threadId = localStorage.getItem("threadId");
-    if (threadId) {
-      setThreadId(threadId);
-    } else {
-      createThreadUseCase()
-        .then((id) => {
-          console.log("Nuevo threadId:", id);
-          setThreadId(id);
-          localStorage.setItem("threadId", id);
-        })
-        .catch((err) => {
-          console.error("Error al crear thread:", err);
-        });
-    }
-  }, []);
-
-  // useEffect(() => {
-  //   setMessages((prev) => {...prev,{text:}});
-  // }, []);
-
-
-  
   //OTHER CODE PREVIOUSLY ASSISTANT
 
   useEffect(() => {
