@@ -5,8 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { FileText, Plus, Trash2, ImageIcon, FileImage } from "lucide-react";
+import { Trash2, Plus } from "lucide-react";
+
 import { Navbar } from "./Navbar";
+import { ResumePDF } from "@/components/ui/pdf-file";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
 interface PersonalInfo {
   fullName: string;
@@ -104,8 +107,6 @@ export const CVCreator = () => {
     "Habilidades",
   ];
 
-  // Herramientas disponibles para navegación rápida
-
   const addLink = () => {
     setPersonalInfo((prev) => ({
       ...prev,
@@ -180,33 +181,8 @@ export const CVCreator = () => {
     setEducation(education.filter((edu) => edu.id !== id));
   };
 
-  const downloadPDF = () => {
-    const link = document.createElement("a");
-    link.href = "#";
-    link.download = `${personalInfo.fullName.replace(/\s+/g, "_")}_CV.pdf`;
-    link.click();
-    alert("Descargando CV como PDF...");
-  };
-
-  const downloadWord = () => {
-    const link = document.createElement("a");
-    link.href = "#";
-    link.download = `${personalInfo.fullName.replace(/\s+/g, "_")}_CV.docx`;
-    link.click();
-    alert("Descargando CV como Word...");
-  };
-
-  const downloadPNG = () => {
-    const link = document.createElement("a");
-    link.href = "#";
-    link.download = `${personalInfo.fullName.replace(/\s+/g, "_")}_CV.png`;
-    link.click();
-    alert("Descargando CV como PNG...");
-  };
-
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Navegación Superior */}
       <Navbar />
 
       <div className="flex h-screen">
@@ -220,30 +196,50 @@ export const CVCreator = () => {
 
             {/* Botones de Exportación */}
             <div className="flex space-x-2">
-              <Button
-                size="sm"
-                className="bg-[#1447E6] text-white"
-                onClick={downloadPDF}
+              <PDFDownloadLink
+                document={
+                  <ResumePDF
+                    personalInfo={{
+                      fullName: personalInfo.fullName,
+                      location: personalInfo.location,
+                      phone: personalInfo.phone,
+                      email: personalInfo.email,
+                      links: personalInfo.links,
+                    }}
+                    summary={summary}
+                    experience={experiences.map((exp) => ({
+                      jobTitle: exp.jobTitle,
+                      company: exp.company,
+                      startDate: exp.startDate,
+                      endDate: exp.endDate,
+                      description: exp.description,
+                    }))}
+                    education={education.map((edu) => ({
+                      degree: edu.degree,
+                      institution: edu.institution,
+                      startDate: edu.startDate,
+                      endDate: edu.endDate,
+                    }))}
+                    skills={skills}
+                  />
+                }
+                fileName={`${personalInfo.fullName.replace(
+                  /\s+/g,
+                  "_"
+                )}_CV.pdf`}
+                style={{
+                  textDecoration: "none",
+                  padding: "10px 20px",
+                  color: "#fff",
+                  backgroundColor: "#155DFC",
+                  borderRadius: 4,
+                  fontWeight: "bold",
+                }}
               >
-                <FileText className="w-4 h-4 mr-1" />
-                PDF
-              </Button>
-              <Button
-                size="sm"
-                className="bg-gray-600 hover:bg-gray-700 text-white"
-                onClick={downloadPNG}
-              >
-                <ImageIcon className="w-4 h-4 mr-1" />
-                PNG
-              </Button>
-              <Button
-                size="sm"
-                className="bg-blue-800  text-white"
-                onClick={downloadWord}
-              >
-                <FileImage className="w-4 h-4 mr-1" />
-                WORD
-              </Button>
+                {({ loading }) =>
+                  loading ? "Generando PDF..." : "Descargar PDF"
+                }
+              </PDFDownloadLink>
             </div>
           </div>
 
@@ -373,7 +369,7 @@ export const CVCreator = () => {
                   ))}
                   <Button
                     onClick={addLink}
-                    className="w-full bg-[#1447E6] hover:bg-green-500 hover:text-black text-white"
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white"
                   >
                     Agregar Enlace
                   </Button>
@@ -496,7 +492,7 @@ export const CVCreator = () => {
 
                 <Button
                   onClick={addExperience}
-                  className="w-full bg-[#1447E6] hover:bg-green-500 hover:text-black text-white"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white"
                 >
                   <Plus className="w-4 h-4 mr-2" />
                   Agregar Experiencia
@@ -594,7 +590,7 @@ export const CVCreator = () => {
 
                 <Button
                   onClick={addEducation}
-                  className="w-full bg-[#1447E6] hover:bg-green-500 hover:text-black text-white"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white"
                 >
                   <Plus className="w-4 h-4 mr-2" />
                   Agregar Educación
@@ -632,7 +628,7 @@ export const CVCreator = () => {
                         technical: [...prev.technical, ""],
                       }))
                     }
-                    className="w-full bg-[#1447E6] hover:bg-green-500 hover:text-black text-white mt-2"
+                    className="w-full bg-gray-600 hover:bg-gray-700 text-white mt-2"
                     size="sm"
                   >
                     <Plus className="w-4 h-4 mr-2" />
@@ -702,8 +698,11 @@ export const CVCreator = () => {
 
         {/* Panel Derecho - Vista Previa del CV */}
         <div className="w-1/2 bg-gray-100 p-8 overflow-y-auto">
-          <div className="max-w-2xl mx-auto bg-white shadow-lg">
-            <div className="p-8 h-full">
+          <div
+            className="max-w-2xl mx-auto bg-white shadow-lg"
+            id="cv-preview-content"
+          >
+            <div className="p-8">
               {/* Encabezado */}
               <div className="text-center mb-6 pb-4 border-b-2 border-gray-800">
                 <h1 className="text-2xl font-bold text-gray-900 mb-2">
@@ -731,7 +730,6 @@ export const CVCreator = () => {
                   </div>
                 )}
               </div>
-
               {/* Resumen */}
               {summary && (
                 <div className="mb-6">
@@ -743,7 +741,6 @@ export const CVCreator = () => {
                   </p>
                 </div>
               )}
-
               {/* Experiencia Laboral */}
               {experiences.length > 0 && (
                 <div className="mb-6">
@@ -779,7 +776,6 @@ export const CVCreator = () => {
                   ))}
                 </div>
               )}
-
               {/* Educación */}
               {education.length > 0 && (
                 <div className="mb-6">
@@ -803,7 +799,6 @@ export const CVCreator = () => {
                   ))}
                 </div>
               )}
-
               {/* Información Adicional */}
               {(skills.technical.length > 0 || skills.languages.length > 0) && (
                 <div className="mb-6">
