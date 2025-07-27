@@ -1,7 +1,5 @@
 "use client";
 
-import type React from "react";
-
 import { useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,19 +10,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Upload,
-  Search,
-  Target,
-  CheckCircle,
-  Info,
-  ArrowLeft,
-  Home,
-  Sparkles,
-} from "lucide-react";
+
+import { Upload, Search, Target, CheckCircle } from "lucide-react";
 import { Navbar } from "./Navbar";
 
 export const CVOptimizer = () => {
@@ -199,21 +188,6 @@ export const CVOptimizer = () => {
             </div>
 
             {/* Text Area */}
-            <div className="space-y-2">
-              <Label
-                htmlFor="cv-text"
-                className="text-sm font-medium text-gray-700"
-              >
-                Pega tu CV en texto plano
-              </Label>
-              <Textarea
-                id="cv-text"
-                value={cvText}
-                onChange={(e) => setCvText(e.target.value)}
-                placeholder="Pega tu CV aquí..."
-                className="min-h-[120px] resize-none"
-              />
-            </div>
           </CardContent>
         </Card>
 
