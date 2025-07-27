@@ -191,14 +191,12 @@ export const CVCreator = () => {
     <div className="min-h-screen bg-gray-100">
       <Navbar />
       <div className="flex h-screen">
-        {/* Panel Izquierdo - Formulario */}
         <div className="w-1/2 bg-gray-800 text-white overflow-y-auto">
-          {/* Encabezado */}
           <div className="p-6 border-b border-gray-700">
             <div className="flex items-center justify-between mb-4">
               <h1 className="text-xl font-semibold">Constructor de CV</h1>
             </div>
-            {/* Botones de Exportación */}
+
             <div className="flex space-x-2">
               <PdfDownloadButton
                 personalInfo={personalInfo}
@@ -667,14 +665,12 @@ export const CVCreator = () => {
           </div>
         </div>
 
-        {/* Panel Derecho - Vista Previa del CV */}
         <div className="w-1/2 bg-gray-100 p-8 overflow-y-auto">
           <div
             className="max-w-2xl mx-auto bg-white shadow-lg"
             id="cv-preview-content"
           >
             <div className="p-8">
-              {/* Encabezado */}
               <div className="text-center mb-6 pb-4 border-b-2 border-gray-800">
                 <h1 className="text-2xl font-bold text-gray-900 mb-2">
                   {personalInfo.fullName || "Tu Nombre"}
@@ -701,7 +697,7 @@ export const CVCreator = () => {
                   </div>
                 )}
               </div>
-              {/* Resumen */}
+
               {summary && (
                 <div className="mb-6">
                   <h2 className="text-lg font-bold text-gray-900 mb-3 border-b border-gray-800 pb-1">
@@ -712,7 +708,7 @@ export const CVCreator = () => {
                   </p>
                 </div>
               )}
-              {/* Experiencia Laboral */}
+
               {experiences.length > 0 && (
                 <div className="mb-6">
                   <h2 className="text-lg font-bold text-gray-900 mb-3 border-b border-gray-800 pb-1">
@@ -747,7 +743,7 @@ export const CVCreator = () => {
                   ))}
                 </div>
               )}
-              {/* Educación */}
+
               {education.length > 0 && (
                 <div className="mb-6">
                   <h2 className="text-lg font-bold text-gray-900 mb-3 border-b border-gray-800 pb-1">
@@ -770,7 +766,7 @@ export const CVCreator = () => {
                   ))}
                 </div>
               )}
-              {/* Información Adicional */}
+
               {(skills.technical.length > 0 || skills.languages.length > 0) && (
                 <div className="mb-6">
                   <h2 className="text-lg font-bold text-gray-900 mb-3 border-b border-gray-800 pb-1">

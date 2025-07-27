@@ -89,10 +89,8 @@ Idioma: ${language}
       <Navbar />
 
       <div className="flex flex-1">
-        {/* Formulario */}
         <div className="w-full lg:w-1/2 bg-white border-r border-gray-200 p-6 overflow-y-auto">
           <div className="space-y-6">
-            {/* Empresa y puesto */}
             <div>
               <div className="flex justify-between items-center mb-2">
                 <Label className="text-gray-700 font-medium">
@@ -131,7 +129,6 @@ Idioma: ${language}
               />
             </div>
 
-            {/* Experiencia */}
             <div>
               <div className="flex justify-between items-center mb-2">
                 <Label className="text-gray-700 font-medium">
@@ -151,7 +148,6 @@ Idioma: ${language}
               />
             </div>
 
-            {/* Educación */}
             <div>
               <div className="flex justify-between items-center mb-2">
                 <Label className="text-gray-700 font-medium">
@@ -171,7 +167,6 @@ Idioma: ${language}
               />
             </div>
 
-            {/* Idioma */}
             <div>
               <Label className="text-gray-700 font-medium mb-2 block">
                 Idioma
@@ -193,7 +188,6 @@ Idioma: ${language}
             </div>
           </div>
 
-          {/* Botón */}
           <div className="mt-8 pb-4">
             <Button
               onClick={handleGenerate}
@@ -207,7 +201,6 @@ Idioma: ${language}
           </div>
         </div>
 
-        {/* Resultado */}
         <div className="w-full lg:w-1/2 bg-gray-50 p-6 overflow-y-auto">
           <Card className="shadow-none border-none bg-transparent">
             <CardHeader className="flex flex-row items-center justify-between pb-2">

@@ -1,7 +1,7 @@
 export const simulatorInterviewUseCase = async (prompt: string) => {
   try {
     const response = await fetch(
-      `http://localhost:3009/gpt/simulator-interview`,
+      `https://backend-fit2work-9bf8a9655cfe.herokuapp.com/gpt/simulator-interview`,
       {
         method: "POST",
         headers: {

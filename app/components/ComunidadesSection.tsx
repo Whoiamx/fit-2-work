@@ -7,14 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  ArrowLeft,
-  Home,
-  Sparkles,
-  Users,
-  Link,
-  ExternalLink,
-} from "lucide-react";
+import { Users, Link, ExternalLink } from "lucide-react";
 import { Navbar } from "./Navbar";
 
 interface Community {

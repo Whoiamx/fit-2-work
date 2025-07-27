@@ -6,7 +6,7 @@ export const postQuestionUseCase = async (
 ) => {
   try {
     const resp = await fetch(
-      "http://localhost:3009/fito-assistant/user-question",
+      "https://backend-fit2work-9bf8a9655cfe.herokuapp.com/fito-assistant/user-question",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

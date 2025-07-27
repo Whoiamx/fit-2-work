@@ -47,7 +47,6 @@ interface LinkedInRecommendations {
   tips: string[];
 }
 
-// --- Example Profile Data ---
 const goodProfileExample = {
   headline:
     "Senior Software Engineer | React, Node.js, AWS | Building Scalable Web Applications | #OpenToWork",
@@ -88,7 +87,6 @@ const badProfileExample = {
   whyBad:
     "Vago, sin detalles específicos, no usa palabras clave, no destaca logros ni responsabilidades. No es profesional y no atrae a reclutadores.",
 };
-// --- End Example Profile Data ---
 
 export default function LinkedInOptimizer() {
   const [aboutMe, setAboutMe] = useState("");
@@ -122,9 +120,8 @@ export default function LinkedInOptimizer() {
 
   const generateRecommendations = useCallback(async () => {
     setIsLoading(true);
-    setRecommendations(null); // Clear previous recommendations
+    setRecommendations(null);
 
-    // Simulate AI processing
     await new Promise((resolve) => setTimeout(resolve, 2500));
 
     const mockRecommendations: LinkedInRecommendations = {
@@ -318,13 +315,11 @@ export default function LinkedInOptimizer() {
       </div>
 
       <div className="flex flex-1 flex-col lg:flex-row p-6 gap-6">
-        {/* Panel Izquierdo - Formularios de Entrada */}
         <div className="w-full lg:w-1/2 bg-white rounded-lg shadow-md p-6 overflow-y-auto">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">
             Ingresa tu Información de LinkedIn
           </h2>
           <div className="space-y-6">
-            {/* Acerca de ti */}
             <div>
               <Label
                 htmlFor="about-me"
@@ -344,7 +339,6 @@ export default function LinkedInOptimizer() {
               </p>
             </div>
 
-            {/* Experiencias */}
             <div>
               <Label className="text-gray-700 font-medium mb-3 block">
                 Experiencia Laboral
@@ -473,7 +467,6 @@ export default function LinkedInOptimizer() {
           </div>
         </div>
 
-        {/* Panel Derecho - Recomendaciones y Tips */}
         <div className="w-full lg:w-1/2 bg-white rounded-lg shadow-md p-6 overflow-y-auto">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">
             Tus Recomendaciones y Tips de LinkedIn
@@ -500,7 +493,6 @@ export default function LinkedInOptimizer() {
 
           {recommendations && (
             <div className="space-y-6">
-              {/* Titular */}
               <Card className="bg-blue-50 border-blue-200">
                 <CardHeader className="flex flex-row items-center space-x-3 p-4 pb-2">
                   <User className="w-6 h-6 text-blue-600" />
@@ -520,7 +512,6 @@ export default function LinkedInOptimizer() {
                 </CardContent>
               </Card>
 
-              {/* Resumen */}
               <Card className="bg-purple-50 border-purple-200">
                 <CardHeader className="flex flex-row items-center space-x-3 p-4 pb-2">
                   <Briefcase className="w-6 h-6 text-purple-600" />
@@ -540,7 +531,6 @@ export default function LinkedInOptimizer() {
                 </CardContent>
               </Card>
 
-              {/* Sugerencias de Experiencia */}
               {recommendations.experienceSuggestions.length > 0 && (
                 <Card className="bg-green-50 border-green-200">
                   <CardHeader className="flex flex-row items-center space-x-3 p-4 pb-2">
@@ -569,7 +559,6 @@ export default function LinkedInOptimizer() {
                 </Card>
               )}
 
-              {/* Habilidades */}
               {recommendations.skills.length > 0 && (
                 <Card className="bg-yellow-50 border-yellow-200">
                   <CardHeader className="flex flex-row items-center space-x-3 p-4 pb-2">
@@ -599,7 +588,6 @@ export default function LinkedInOptimizer() {
                 </Card>
               )}
 
-              {/* Certificaciones */}
               {recommendations.certifications.length > 0 && (
                 <Card className="bg-red-50 border-red-200">
                   <CardHeader className="flex flex-row items-center space-x-3 p-4 pb-2">
@@ -623,7 +611,6 @@ export default function LinkedInOptimizer() {
                 </Card>
               )}
 
-              {/* Tips Generales */}
               {recommendations.tips.length > 0 && (
                 <Card className="bg-gray-50 border-gray-200">
                   <CardHeader className="flex flex-row items-center space-x-3 p-4 pb-2">

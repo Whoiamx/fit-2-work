@@ -1,7 +1,7 @@
 export const createThreadUseCase = async () => {
   try {
     const resp = await fetch(
-      "http://localhost:3009/fito-assistant/create-thread",
+      "https://backend-fit2work-9bf8a9655cfe.herokuapp.com/fito-assistant/create-thread",
       {
         method: "POST",
       }

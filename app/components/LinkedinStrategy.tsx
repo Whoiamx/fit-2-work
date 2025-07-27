@@ -1,7 +1,7 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { useState, useCallback, useEffect, useRef } from "react"; // Import useRef
+import { useState, useCallback, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -23,7 +23,7 @@ import {
   Network,
   ChevronLeft,
   ChevronRight,
-} from "lucide-react"; // Import Chevron icons
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "./Navbar";
 
@@ -31,7 +31,7 @@ interface PostIdea {
   title: string;
   content: string;
   hashtags: string[];
-  reason: string; // Why this post is good for the algorithm
+  reason: string;
 }
 
 interface HRContactTip {
@@ -40,7 +40,6 @@ interface HRContactTip {
   keywords: string[];
 }
 
-// Static list of HR contact tips to rotate
 const hrContactTips: HRContactTip[] = [
   {
     title: "Identifica a los reclutadores clave",
@@ -85,7 +84,6 @@ const hrContactTips: HRContactTip[] = [
   },
 ];
 
-// Static list of general strategy tips
 const generalStrategyTips: string[] = [
   "Mantén tu perfil actualizado y completo con tus últimos logros y habilidades.",
   "Participa activamente en grupos de LinkedIn relacionados con tu industria.",
@@ -103,9 +101,8 @@ export const LinkedInStrategy = () => {
   const [generatedPostIdeas, setGeneratedPostIdeas] = useState<PostIdea[]>([]);
   const [isLoadingContent, setIsLoadingContent] = useState(false);
 
-  // State for rotating contact strategy tips
   const [currentContactTipIndex, setCurrentContactTipIndex] = useState(0);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null); // Ref to store the interval ID
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const resetInterval = useCallback(() => {
     if (intervalRef.current) {
@@ -115,14 +112,14 @@ export const LinkedInStrategy = () => {
       setCurrentContactTipIndex(
         (prevIndex) => (prevIndex + 1) % hrContactTips.length
       );
-    }, 30000); // Change every 30 seconds
+    }, 30000);
   }, []);
 
   useEffect(() => {
-    resetInterval(); // Start the interval when component mounts
+    resetInterval();
     return () => {
       if (intervalRef.current) {
-        clearInterval(intervalRef.current); // Clear interval on unmount
+        clearInterval(intervalRef.current);
       }
     };
   }, [resetInterval]);
@@ -131,7 +128,7 @@ export const LinkedInStrategy = () => {
     setCurrentContactTipIndex(
       (prevIndex) => (prevIndex + 1) % hrContactTips.length
     );
-    resetInterval(); // Reset the interval timer on manual interaction
+    resetInterval();
   }, [resetInterval]);
 
   const handlePrevTip = useCallback(() => {
@@ -139,10 +136,9 @@ export const LinkedInStrategy = () => {
       (prevIndex) =>
         (prevIndex - 1 + hrContactTips.length) % hrContactTips.length
     );
-    resetInterval(); // Reset the interval timer on manual interaction
+    resetInterval();
   }, [resetInterval]);
 
-  // Funcion que controla la generación de contenido (mockeada)
   const handleGenerateContent = useCallback(async () => {
     if (!jobRole.trim() || !industry.trim()) {
       alert(
@@ -153,7 +149,7 @@ export const LinkedInStrategy = () => {
 
     setIsLoadingContent(true);
     setGeneratedPostIdeas([]);
-    await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate AI processing
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     const mockPostIdeas: PostIdea[] = [
       {
@@ -206,14 +202,12 @@ export const LinkedInStrategy = () => {
     <div className="min-h-screen bg-gray-100 flex flex-col">
       <Navbar />
       <div className="flex flex-1 flex-col lg:flex-row p-6 gap-6">
-        {/* Panel Izquierdo - Formularios de Entrada */}
         <div className="w-full flex flex-col gap-8 lg:w-1/2 bg-white rounded-lg shadow-md p-6 overflow-y-auto">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">
             Define tu Estrategia en LinkedIn para Mejorar tu{" "}
             <u className="text-blue-600 font-bold"> {""} Visibilidad</u>
           </h2>
 
-          {/* Sección de Contenido */}
           <Card className="mb-6 bg-blue-50 border-blue-200">
             <CardHeader>
               <div className="flex items-center space-x-2">
@@ -278,7 +272,6 @@ export const LinkedInStrategy = () => {
             </CardContent>
           </Card>
 
-          {/* Sección de Contactos y Red - Now with rotating tips and navigation */}
           <Card className="bg-purple-50 border-purple-200">
             <CardHeader>
               <div className="flex items-center space-x-2">
@@ -294,8 +287,6 @@ export const LinkedInStrategy = () => {
             </CardHeader>
             <CardContent className="relative min-h-[120px] flex items-center justify-center px-12">
               {" "}
-              {/* Added px for button space */}
-              {/* Previous Tip Button */}
               <Button
                 variant="ghost"
                 size="icon"
@@ -304,7 +295,6 @@ export const LinkedInStrategy = () => {
               >
                 <ChevronLeft className="w-5 h-5" />
               </Button>
-              {/* Rotating Tip Display */}
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentContactTipIndex}
@@ -341,7 +331,6 @@ export const LinkedInStrategy = () => {
                   )}
                 </motion.div>
               </AnimatePresence>
-              {/* Next Tip Button */}
               <Button
                 variant="ghost"
                 size="icon"
@@ -372,7 +361,6 @@ export const LinkedInStrategy = () => {
           )}
         </div>
 
-        {/* Panel Derecho - Recomendaciones y Tips */}
         <div className="w-full lg:w-1/2 bg-white rounded-lg shadow-md p-6 overflow-y-auto">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">
             Tus Recomendaciones de Estrategia
@@ -387,7 +375,6 @@ export const LinkedInStrategy = () => {
             </div>
           ) : (
             <div className="space-y-6">
-              {/* Ideas de Publicación Generadas */}
               {generatedPostIdeas.length > 0 && (
                 <Card className="bg-blue-50 border-blue-200">
                   <CardHeader className="flex flex-row items-center space-x-3 p-4 pb-2">
@@ -428,8 +415,6 @@ export const LinkedInStrategy = () => {
                   </CardContent>
                 </Card>
               )}
-
-              {/* Tips Generales de Estrategia */}
 
               {!generatedPostIdeas.length && (
                 <div className="text-center text-gray-500 py-12">

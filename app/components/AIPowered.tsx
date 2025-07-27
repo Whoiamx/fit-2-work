@@ -11,9 +11,7 @@ export const AIPoweredFeaturesSection = () => {
   return (
     <section className="bg-white py-16">
       <div className="container mx-auto px-4">
-        {/* Main AI Explanation - Two Columns */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-          {/* Left Column: Text */}
           <div>
             <Badge className="mb-4 bg-blue-100 text-blue-700">
               ✨ Potenciado por IA
@@ -49,7 +47,6 @@ export const AIPoweredFeaturesSection = () => {
             </Link>
           </div>
 
-          {/* Right Column: Image */}
           <div className="flex justify-center items-center">
             <Image
               src={"/openai.png"}

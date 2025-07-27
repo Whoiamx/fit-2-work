@@ -56,7 +56,6 @@ const roadmapItems: RoadmapItem[] = [
 export const Roadmap = () => {
   return (
     <section className="bg-gradient-to-br from-gray-900 to-blue-950 py-16 text-white relative overflow-hidden">
-      {/* Fondo con patrón sutil */}
       <div className="absolute inset-0 opacity-10">
         <svg
           className="w-full h-full"
@@ -95,13 +94,12 @@ export const Roadmap = () => {
         </div>
 
         <div className="relative max-w-3xl mx-auto">
-          {/* Línea central del roadmap */}
           <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-blue-600 rounded-full hidden md:block"></div>
 
           <div className="space-y-12 md:space-y-16">
             {roadmapItems.map((item, index) => {
               const IconComponent = item.icon;
-              const isEven = index % 2 === 0; // Para alternar izquierda/derecha en desktop
+              const isEven = index % 2 === 0;
 
               return (
                 <div

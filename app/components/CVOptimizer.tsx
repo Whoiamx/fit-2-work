@@ -86,14 +86,12 @@ export const CVOptimizer = () => {
       <Navbar />
 
       <div className="max-w-4xl mx-auto p-6 space-y-8">
-        {/* Header */}
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-gray-900">
             ¿Qué podes esperar de nuestro optimizador de CV?
           </h1>
         </div>
 
-        {/* Expectativas */}
         <div className="grid md:grid-cols-2 gap-4">
           <Card className="border-l-4 border-l-blue-500">
             <CardHeader className="pb-3">
@@ -126,7 +124,6 @@ export const CVOptimizer = () => {
           </Card>
         </div>
 
-        {/* Analiza tu CV */}
         <Card>
           <CardHeader>
             <CardTitle className="text-xl">Analiza tu CV</CardTitle>
@@ -136,7 +133,6 @@ export const CVOptimizer = () => {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            {/* File Upload Area */}
             <div
               className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
                 isDragOver
@@ -185,7 +181,6 @@ export const CVOptimizer = () => {
               </label>
             </div>
 
-            {/* Botón de análisis */}
             <Button
               onClick={handleAnalyze}
               className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 text-lg"
@@ -203,7 +198,6 @@ export const CVOptimizer = () => {
           </CardContent>
         </Card>
 
-        {/* Resultado IA */}
         {respuestaIA && (
           <Card>
             <CardHeader>
@@ -226,7 +220,6 @@ export const CVOptimizer = () => {
           </Card>
         )}
 
-        {/* Texto extraído */}
         {textoExtraido && (
           <Card>
             <CardHeader>

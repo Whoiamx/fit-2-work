@@ -1,7 +1,7 @@
 "use client";
 
 import Chat from "@/components/ui/Chat";
-import { createThreadUseCase } from "@/lib/use-cases/create-thread.use-case";
+
 import { simulatorInterviewUseCase } from "@/lib/use-cases/simulator.usecase";
 
 import { useEffect, useState } from "react";
@@ -17,8 +17,6 @@ export const Chatbot = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState("");
-
-  //OTHER CODE PREVIOUSLY ASSISTANT
 
   useEffect(() => {
     const welcomeMessage: Message = {
