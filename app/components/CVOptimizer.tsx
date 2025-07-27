@@ -11,22 +11,23 @@ import {
 } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 
-import { Label } from "@/components/ui/label";
-
-import { Upload, Search, Target, CheckCircle } from "lucide-react";
+import { Upload, Search, Target, CheckCircle, Loader2 } from "lucide-react";
 import { Navbar } from "./Navbar";
+import { analyzePdf } from "@/lib/use-cases/pdf-analizer.use-case";
 
 export const CVOptimizer = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [cvText, setCvText] = useState("");
-  const [analysisType, setAnalysisType] = useState("general");
-  const [includeATS, setIncludeATS] = useState(false);
+  const [respuestaIA, setRespuestaIA] = useState("");
+  const [textoExtraido, setTextoExtraido] = useState("");
   const [isDragOver, setIsDragOver] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFileUpload = useCallback((file: File) => {
     if (file.type === "application/pdf" && file.size <= 10 * 1024 * 1024) {
       setSelectedFile(file);
-      console.log("Archivo subido:", file.name);
+      setRespuestaIA("");
+      setTextoExtraido("");
     } else {
       alert("Por favor, sube un archivo PDF de máximo 10MB");
     }
@@ -61,26 +62,23 @@ export const CVOptimizer = () => {
     }
   };
 
-  const handleAnalyze = () => {
-    if (!selectedFile && !cvText.trim()) {
+  const handleAnalyze = async () => {
+    if (!selectedFile) {
       alert("Por favor, sube un archivo o pega tu CV en texto plano");
       return;
     }
 
-    console.log("Analizando CV:", {
-      file: selectedFile?.name,
-      textLength: cvText.length,
-      analysisType,
-      includeATS,
-    });
-
-    alert(
-      "¡Análisis iniciado! En una aplicación real, aquí se procesaría tu CV."
-    );
-  };
-
-  const goToHome = () => {
-    alert("Navegando al inicio...");
+    try {
+      setIsLoading(true);
+      const data = await analyzePdf(selectedFile);
+      setTextoExtraido(data.textoExtraido);
+      setRespuestaIA(data.respuestaIA);
+    } catch (error) {
+      alert("Error al analizar el PDF");
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -187,16 +185,65 @@ export const CVOptimizer = () => {
               </label>
             </div>
 
-            {/* Text Area */}
+            {/* Botón de análisis */}
+            <Button
+              onClick={handleAnalyze}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 text-lg"
+              disabled={!selectedFile || isLoading}
+            >
+              {isLoading ? (
+                <div className="flex items-center justify-center gap-2">
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Analizando...
+                </div>
+              ) : (
+                "Analizar CV"
+              )}
+            </Button>
           </CardContent>
         </Card>
 
-        <Button
-          onClick={handleAnalyze}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 text-lg"
-        >
-          Analizar CV
-        </Button>
+        {/* Resultado IA */}
+        {respuestaIA && (
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">
+                Sugerencias del asistente
+              </CardTitle>
+              <CardDescription>
+                Estas recomendaciones están pensadas para mejorar tu perfil
+                profesional.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div
+                className="prose prose-sm max-w-none"
+                dangerouslySetInnerHTML={{
+                  __html: respuestaIA.replace(/\n/g, "<br />"),
+                }}
+              />
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Texto extraído */}
+        {textoExtraido && (
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Texto extraído del PDF</CardTitle>
+              <CardDescription>
+                Este es el contenido leído desde tu archivo CV.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Textarea
+                value={textoExtraido}
+                readOnly
+                className="min-h-[200px]"
+              />
+            </CardContent>
+          </Card>
+        )}
       </div>
     </div>
   );
