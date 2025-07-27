@@ -4,9 +4,6 @@ export const examinerCvUseCase = async (text: string) => {
       "https://backend-fit2work-9bf8a9655cfe.herokuapp.com/gpt/examiner-cv",
 
       {
-        headers: {
-          "Content-Type": "application/json",
-        },
         method: "POST",
         body: JSON.stringify({ prompt: text }),
       }
