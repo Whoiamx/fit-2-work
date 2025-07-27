@@ -14,6 +14,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Upload, Search, Target, CheckCircle, Loader2 } from "lucide-react";
 import { Navbar } from "./Navbar";
 import { analyzePdf } from "@/lib/use-cases/pdf-analizer.use-case";
+import { Label } from "@radix-ui/react-label";
+import { examinerCvUseCase } from "@/lib/use-cases/examiner-cv-text.use-case";
 
 export const CVOptimizer = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -28,6 +30,7 @@ export const CVOptimizer = () => {
       setSelectedFile(file);
       setRespuestaIA("");
       setTextoExtraido("");
+      setCvText("");
     } else {
       alert("Por favor, sube un archivo PDF de máximo 10MB");
     }
@@ -75,6 +78,26 @@ export const CVOptimizer = () => {
       setRespuestaIA(data.respuestaIA);
     } catch (error) {
       alert("Error al analizar el PDF");
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleTextCv = async () => {
+    if (!cvText.trim()) {
+      alert("Por favor, ingresa tu CV en texto plano");
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      const respuesta = await examinerCvUseCase(cvText);
+      setRespuestaIA(respuesta);
+      setTextoExtraido(cvText);
+      setSelectedFile(null);
+    } catch (error) {
+      alert("Error al analizar el CV en texto plano");
       console.error(error);
     } finally {
       setIsLoading(false);
@@ -180,11 +203,26 @@ export const CVOptimizer = () => {
                 </div>
               </label>
             </div>
+            <div className="space-y-2">
+              <Label
+                htmlFor="cv-text"
+                className="text-sm font-medium text-gray-700"
+              >
+                Pega tu CV en texto plano
+              </Label>
+              <Textarea
+                id="cv-text"
+                value={cvText}
+                onChange={(e) => setCvText(e.target.value)}
+                placeholder="Pega tu CV aquí..."
+                className="min-h-[120px] resize-none"
+              />
+            </div>
 
             <Button
               onClick={handleAnalyze}
               className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 text-lg"
-              disabled={!selectedFile || isLoading}
+              disabled={!selectedFile || isLoading || cvText.trim().length > 0}
             >
               {isLoading ? (
                 <div className="flex items-center justify-center gap-2">
@@ -192,7 +230,22 @@ export const CVOptimizer = () => {
                   Analizando...
                 </div>
               ) : (
-                "Analizar CV"
+                "Analizar CV (PDF)"
+              )}
+            </Button>
+
+            <Button
+              onClick={handleTextCv}
+              className="w-full bg-green-600 hover:bg-green-700 text-white py-3 text-lg"
+              disabled={isLoading || !cvText.trim() || selectedFile !== null}
+            >
+              {isLoading ? (
+                <div className="flex items-center justify-center gap-2">
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Analizando...
+                </div>
+              ) : (
+                "Analizar CV en texto plano"
               )}
             </Button>
           </CardContent>
@@ -220,12 +273,13 @@ export const CVOptimizer = () => {
           </Card>
         )}
 
+        {/* ✅ TEXTO EXTRAÍDO O PEGADO */}
         {textoExtraido && (
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Texto extraído del PDF</CardTitle>
+              <CardTitle className="text-lg">Texto analizado</CardTitle>
               <CardDescription>
-                Este es el contenido leído desde tu archivo CV.
+                Este es el contenido leído desde tu archivo o texto pegado.
               </CardDescription>
             </CardHeader>
             <CardContent>
