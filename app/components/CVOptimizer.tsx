@@ -273,7 +273,6 @@ export const CVOptimizer = () => {
           </Card>
         )}
 
-        {/* ✅ TEXTO EXTRAÍDO O PEGADO */}
         {textoExtraido && (
           <Card>
             <CardHeader>
