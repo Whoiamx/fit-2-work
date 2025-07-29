@@ -20,21 +20,51 @@ export const examinerCvUseCase = async (text: string): Promise<string> => {
       throw new Error("La respuesta no contiene 'devolutionAi'");
     }
 
-    // Función para mejorar el formato del texto recibido
-    const fixTextFormatting = (input: string): string => {
-      return input
-        .replace(/###/g, "\n\n###")
-        .replace(/(\d+)\.\s*/g, "\n$1. ")
-        .replace(/\s{2,}/g, " ")
-        .trim();
+    const formatResponseToHTML = (input: string): string => {
+      let formatted = input;
+
+      formatted = formatted.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+
+      formatted = formatted.replace(
+        /^(\d+)\.\s*(.+)$/gm,
+        "<p><strong>$1.</strong> $2</p>"
+      );
+
+      const lines = formatted.split("\n");
+      let inList = false;
+      let resultLines: string[] = [];
+      lines.forEach((line) => {
+        if (/^\s*-\s+/.test(line)) {
+          if (!inList) {
+            inList = true;
+            resultLines.push("<ul>");
+          }
+          const listItem = line.replace(/^\s*-\s+/, "");
+          resultLines.push(`<li>${listItem}</li>`);
+        } else {
+          if (inList) {
+            inList = false;
+            resultLines.push("</ul>");
+          }
+
+          if (line.trim() === "") {
+          } else {
+            resultLines.push(`<p>${line.trim()}</p>`);
+          }
+        }
+      });
+      if (inList) {
+        resultLines.push("</ul>");
+      }
+      formatted = resultLines.join("\n");
+
+      return formatted;
     };
 
-    const formattedText = fixTextFormatting(data.devolutionAi);
+    const formattedText = formatResponseToHTML(data.devolutionAi.trim());
 
-    console.log(formattedText);
     return formattedText;
   } catch (error) {
-    // Propaga el error para manejarlo en el frontend si es necesario
     throw new Error(
       `Error en examinerCvUseCase: ${
         error instanceof Error ? error.message : "Error desconocido"
